@@ -1,60 +1,61 @@
-<h1> User</h1>
-<span><%= link "Settings", to: Routes.setting_path(@conn, :index) %></span></br>
-<span><%= link "Add", to: Routes.add_path(@conn, :index) %></span></br>
-<div>
+<style>
+
+  h3 {
+    text-align: center;
+  }
+  .tweetbox {
+  border-style: solid;
+  border-width: 3px;
+  border-radius: 5px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin-bottom: 50px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+  .listings {
+    text-align: center;
+  }
+  .centerplease {
+    /* width: 80%; */
+    margin: 0 auto;
+    /* padding: 20px; */
+  }
+</style>
+
+<h1> UserName</h1>
+<div align="right">
+  <a class="button" href="<%= Routes.setting_path(@conn, :index) %>">Settings</a></br>
+</div>
+
+<div class="tweetbox">
   <form>
 
   Tweet:<br>
   <input type="text" name="tweettext">
 
-  <input type="submit" value="Submit">
+  <input type="submit" value="Submit" style="float: right;">
   </form>
 </div>
-<section class="row">
-  <article class="column">
-    <h3>Your Tweets</h3>
 
+
+<div class="row">
+  <div class="column">
+    <h3>Your Tweets</h3>
+    <div class="listings">
     <%= for key <- connection_keys(@conn) do %>
       <%= render("tweets.html", key: key) %>
     <% end %>
-  </article>
-  <article class="column">
-    <h3>Your Feed</h3>
+  </div>
+</div>
 
-      <%= for key <- connection_keys(@conn) do %>
-        <%= render("feed.html", key: key) %>
-      <% end %>
-  </article>
-</section>
-<!-- <table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Followers</th>
-      <th>Subscribers</th>
-      <th>Feed</th>
-      <th>Tweets</th>
+  <div class="column">
+    <h3>Your Feed   <a class="button" href="<%= Routes.add_path(@conn, :index) %>">Add</a></h3>
+    <div class="listings">
 
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-<%= for user <- @user do %>
-    <tr>
-      <td><%= user.name %></td>
-      <td><%= user.followers %></td>
-      <td><%= user.subscribers %></td>
-      <td><%= user.feed %></td>
-      <td><%= user.tweets %></td>
-
-      <td>
-        <span><%= link "Show", to: Routes.user_path(@conn, :show, user) %></span>
-        <span><%= link "Edit", to: Routes.user_path(@conn, :edit, user) %></span>
-        <span><%= link "Delete", to: Routes.user_path(@conn, :delete, user), method: :delete, data: [confirm: "Are you sure?"] %></span>
-      </td>
-    </tr>
-<% end %>
-  </tbody>
-</table> -->
-
-<!-- <span><%= link "New User", to: Routes.user_path(@conn, :new) %></span> -->
+    <%= for key <- connection_keys(@conn) do %>
+      <%= render("feed.html", key: key) %>
+    <% end %>
+  </div>
+</div>
+</div>
