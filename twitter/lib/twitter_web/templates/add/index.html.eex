@@ -22,7 +22,15 @@
       </td>
     </tr>
 <% end %>
+
+
   </tbody>
 </table>
 
 <span><%= link "New Add", to: Routes.add_path(@conn, :new) %></span>
+
+<h3>Keys for the conn Struct</h3>
+
+  <%= for key <- connection_keys(@conn) do %>
+    <p><%= key %></p>
+  <% end %>

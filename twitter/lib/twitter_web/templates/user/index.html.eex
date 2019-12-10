@@ -1,7 +1,32 @@
 <h1> User</h1>
-<span><%= link "Settings", to: Routes.setting_path(@conn, :index) %></span>
-<span><%= link "Add", to: Routes.add_path(@conn, :index) %></span>
-<table>
+<span><%= link "Settings", to: Routes.setting_path(@conn, :index) %></span></br>
+<span><%= link "Add", to: Routes.add_path(@conn, :index) %></span></br>
+<div>
+  <form>
+
+  Tweet:<br>
+  <input type="text" name="tweettext">
+
+  <input type="submit" value="Submit">
+  </form>
+</div>
+<section class="row">
+  <article class="column">
+    <h3>Your Tweets</h3>
+
+      <%= for key <- connection_keys(@conn) do %>
+        <p><%= key %></p>
+      <% end %>
+  </article>
+  <article class="column">
+    <h3>Your Feed</h3>
+
+      <%= for key <- connection_keys(@conn) do %>
+        <p><%= key %></p>
+      <% end %>
+  </article>
+</section>
+<!-- <table>
   <thead>
     <tr>
       <th>Name</th>
@@ -30,6 +55,6 @@
     </tr>
 <% end %>
   </tbody>
-</table>
+</table> -->
 
-<span><%= link "New User", to: Routes.user_path(@conn, :new) %></span>
+<!-- <span><%= link "New User", to: Routes.user_path(@conn, :new) %></span> -->
