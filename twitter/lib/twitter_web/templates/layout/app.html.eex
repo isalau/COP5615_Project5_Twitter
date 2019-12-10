@@ -13,7 +13,15 @@
         <nav role="navigation">
           <ul>
             <li><a href="https://hexdocs.pm/phoenix/overview.html">Get Started</a></li>
-            
+            <li>
+              <a href="<%= Routes.page_path(@conn, :index) %>">Home</a>
+            </li>
+            <li>
+              <a href="<%= Routes.register_path(@conn, :index) %>">Register</a>
+            </li>
+            <li>
+              <a href="<%= Routes.signin_path(@conn, :index) %>">SignIn</a>
+            </li>
           </ul>
         </nav>
         <a href="http://phoenixframework.org/" class="phx-logo">

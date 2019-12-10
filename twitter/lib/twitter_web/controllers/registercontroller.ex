@@ -6,4 +6,10 @@ defmodule TwitterWeb.RegisterController do
     |> put_flash(:info, "In register!")
     |> render("index.html")
   end
+
+  def register(conn, _params) do
+    conn
+    |> put_flash(:info, "In register!")
+    |> render("index.html")
+  end
 end
