@@ -17,10 +17,10 @@ defmodule TwitterWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
-    get "/register", PageController, :register
-    get "/signIn", PageController, :signIn
+    get "/register", RegisterController, :index
+    get "/signin", SigninController, :index
 
-    get "/*thing", PageController, :wildcard
+    # get "/*thing", PageController, :wildcard
   end
 
   # Other scopes may use custom stacks.
