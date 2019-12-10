@@ -1,28 +1,5 @@
-<h1>Listing Setting</h1>
+<h1>Settings</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Password</th>
-
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-<%= for setting <- @setting do %>
-    <tr>
-      <td><%= setting.name %></td>
-      <td><%= setting.password %></td>
-
-      <td>
-        <span><%= link "Show", to: Routes.setting_path(@conn, :show, setting) %></span>
-        <span><%= link "Edit", to: Routes.setting_path(@conn, :edit, setting) %></span>
-        <span><%= link "Delete", to: Routes.setting_path(@conn, :delete, setting), method: :delete, data: [confirm: "Are you sure?"] %></span>
-      </td>
-    </tr>
-<% end %>
-  </tbody>
-</table>
-
-<span><%= link "New Setting", to: Routes.setting_path(@conn, :new) %></span>
+<div align="center">
+  <a class="button" href="<%= Routes.setting_path(@conn, :index) %>">Delete Account</a></br>
+</div>
