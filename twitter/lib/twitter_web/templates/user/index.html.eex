@@ -14,15 +14,15 @@
   <article class="column">
     <h3>Your Tweets</h3>
 
-      <%= for key <- connection_keys(@conn) do %>
-        <p><%= key %></p>
-      <% end %>
+    <%= for key <- connection_keys(@conn) do %>
+      <%= render("tweets.html", key: key) %>
+    <% end %>
   </article>
   <article class="column">
     <h3>Your Feed</h3>
 
       <%= for key <- connection_keys(@conn) do %>
-        <p><%= key %></p>
+        <%= render("feed.html", key: key) %>
       <% end %>
   </article>
 </section>

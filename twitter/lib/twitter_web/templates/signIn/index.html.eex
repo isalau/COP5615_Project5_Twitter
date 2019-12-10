@@ -1,6 +1,6 @@
-<div class="phx-hero">
+<!-- <div class="phx-hero">
   <h2>SignIn</h2>
-</div>
+</div> -->
 <form>
 Username:<br>
 <input type="text" name="username">

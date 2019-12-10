@@ -3,7 +3,7 @@ defmodule TwitterWeb.RegisterController do
 
   def index(conn, _params) do
     conn
-    |> put_flash(:info, "In register!")
+    |> put_flash(:info, "Please fill out form to register!")
     |> render("index.html")
   end
 

@@ -1,13 +1,23 @@
-<section class="phx-hero">
+<style>
+    .centerplease {
+        /* width: 80%; */
+        margin: 0 auto;
+        /* padding: 20px; */
+    }
+</style>
+
+<div class="centerplease">
   <h1><%= gettext "Welcome to %{name}!", name: "Twitter" %></h1>
   <p>Please sign in or register</p>
-</section>
 
-<section class="row">
-  <article class="column">
-      <a href="<%= Routes.register_path(@conn, :index) %>">Register</a>
-  </article>
-  <article class="column">
-      <a href="<%= Routes.signin_path(@conn, :index) %>">SignIn</a>
-  </article>
-</section>
+
+  <div class="row">
+    <div class="column"></div>
+
+    <div class="column">
+      <a class="button" href="<%= Routes.register_path(@conn, :index) %>">Register</a></br>
+      <a class="button" href="<%= Routes.signin_path(@conn, :index) %>">SignIn</a>
+    </div>
+    <div class="column"></div>
+  </div>
+</div>

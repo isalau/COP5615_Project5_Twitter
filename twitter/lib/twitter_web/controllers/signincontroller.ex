@@ -3,7 +3,7 @@ defmodule TwitterWeb.SigninController do
 
   def index(conn, _params) do
     conn
-    |> put_flash(:info, "In register!")
+    |> put_flash(:info, "Please sign in")
     |> render("index.html")
   end
 

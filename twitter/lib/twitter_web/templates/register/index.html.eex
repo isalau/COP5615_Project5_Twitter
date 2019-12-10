@@ -1,13 +1,13 @@
-<div class="phx-hero">
+<!-- <div class="phx-hero">
   <h2>Register</h2>
-</div>
+</div> -->
 
 <div>
   <form>
-  First name:<br>
+  <!-- First name:<br>
   <input type="text" name="firstname"><br>
   Last name:<br>
-  <input type="text" name="lastname">
+  <input type="text" name="lastname"> -->
   Username:<br>
   <input type="text" name="username">
   Password:<br>
