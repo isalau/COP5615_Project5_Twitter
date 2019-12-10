@@ -1,0 +1,18 @@
+<h1>Show Setting</h1>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @setting.name %>
+  </li>
+
+  <li>
+    <strong>Password:</strong>
+    <%= @setting.password %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.setting_path(@conn, :edit, @setting) %></span>
+<span><%= link "Back", to: Routes.setting_path(@conn, :index) %></span>

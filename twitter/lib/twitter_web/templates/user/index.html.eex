@@ -1,5 +1,6 @@
-<h1>Listing User</h1>
-
+<h1> User</h1>
+<span><%= link "Settings", to: Routes.setting_path(@conn, :index) %></span>
+<span><%= link "Add", to: Routes.add_path(@conn, :index) %></span>
 <table>
   <thead>
     <tr>

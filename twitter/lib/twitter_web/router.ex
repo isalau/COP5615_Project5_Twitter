@@ -22,6 +22,8 @@ defmodule TwitterWeb.Router do
     resources "/events", EventController
     resources "/tweet", TweetController
     resources "/user", UserController
+    resources "/setting", SettingController
+    resources "/add", AddController
 
     # get "/*thing", PageController, :wildcard
   end

@@ -1,0 +1,18 @@
+<h1>Show Add</h1>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @add.name %>
+  </li>
+
+  <li>
+    <strong>Tofollow:</strong>
+    <%= @add.tofollow %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.add_path(@conn, :edit, @add) %></span>
+<span><%= link "Back", to: Routes.add_path(@conn, :index) %></span>

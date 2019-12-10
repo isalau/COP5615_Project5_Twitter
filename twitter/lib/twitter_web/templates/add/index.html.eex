@@ -1,0 +1,28 @@
+<h1>Listing Add</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Tofollow</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for add <- @add do %>
+    <tr>
+      <td><%= add.name %></td>
+      <td><%= add.tofollow %></td>
+
+      <td>
+        <span><%= link "Show", to: Routes.add_path(@conn, :show, add) %></span>
+        <span><%= link "Edit", to: Routes.add_path(@conn, :edit, add) %></span>
+        <span><%= link "Delete", to: Routes.add_path(@conn, :delete, add), method: :delete, data: [confirm: "Are you sure?"] %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Add", to: Routes.add_path(@conn, :new) %></span>
