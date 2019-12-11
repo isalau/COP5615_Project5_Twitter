@@ -18,4 +18,11 @@ defmodule Engine do
     feed = []
     {:ok, {followers, subscribed, feed, tweets}}
   end
+
+  def handle_call({:register, name, pass}, _from, {followers, subscribed, feed, tweets}) do
+    subscribed = subscribed ++ [name]
+    followers = followers ++ [{:"#{name}", pass}]
+    # Register.get_people(name,people)#HERE everyone is on everyone's list
+    {:reply, {followers, subscribed, feed, tweets}, {followers, subscribed, feed, tweets}}
+  end
 end

@@ -6,7 +6,15 @@ defmodule Register do
     if name in tot_users do
       IO.puts("username already exists")
     else
-      DySupervisor.start_child(name)
+      IO.puts("IN REGISTER")
+      dpid = Process.whereis(DySupervisor)
+
+      if(dpid != nil) do
+        DySupervisor.start_link(1)
+        DySupervisor.start_child(name)
+      else
+        DySupervisor.start_child(name)
+      end
 
       # Start the CSSA
       tweets = []
