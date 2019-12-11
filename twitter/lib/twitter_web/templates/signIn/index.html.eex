@@ -1,11 +1,11 @@
 <!-- <div class="phx-hero">
   <h2>SignIn</h2>
 </div> -->
-<form>
-Username:<br>
-<input type="text" name="username">
-Password:<br>
-<input type="password" name="password1">
+<%= form_for @conn, Routes.signin_path(@conn, :signin), fn f -> %>
+   <div class="form-group">
+     <label>User Name:<%= text_input f, :username, class: "control-label" %></label>
+     <label>Password:<%= password_input f, :password1, class: "form-control" %></label>
 
-<input type="submit" value="Submit">
-</form>
+   </div>
+   <%= submit "Submit", class: "btn btn-primary" %>
+<% end %>

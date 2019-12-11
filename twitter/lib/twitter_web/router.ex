@@ -20,6 +20,7 @@ defmodule TwitterWeb.Router do
     get "/register", RegisterController, :index
     post "/register", RegisterController, :register
     get "/signin", SigninController, :index
+    post "/signin", SigninController, :signin
     resources "/events", EventController
     resources "/tweet", TweetController
     post "/tweet", TweetController, :create
