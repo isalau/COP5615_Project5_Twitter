@@ -4,6 +4,13 @@
         margin: 0 auto;
         /* padding: 20px; */
     }
+    .button-large {
+  font-size: 1.4rem;
+  height: 4.5rem;
+  line-height: 4.5rem;
+  padding: 0 2rem;
+  width: 40rem;
+}
 </style>
 
 <div class="centerplease">
@@ -15,8 +22,8 @@
     <div class="column"></div>
 
     <div class="column">
-      <a class="button" href="<%= Routes.register_path(@conn, :index) %>">Register</a></br>
-      <a class="button" href="<%= Routes.signin_path(@conn, :index) %>">SignIn</a>
+      <a class="button button-large" href="<%= Routes.register_path(@conn, :index) %>">Register</a></br>
+      <a class="button button-large" href="<%= Routes.signin_path(@conn, :index) %>">SignIn</a>
     </div>
     <div class="column"></div>
   </div>
