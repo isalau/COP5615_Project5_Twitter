@@ -11,7 +11,8 @@ defmodule TwitterWeb.RegisterController do
 
   def register(conn, params) do
     user_name = get_in(params, ["username"])
-    password = get_in(params, ["password1"])
+    password1 = get_in(params, ["password1"])
+    password2 = get_in(params, ["password2"])
     # IO.inspect(user_name, label: "USERNAME")
     {_, all_users, _, _} = :sys.get_state(:"#{Engine}_cssa")
 
@@ -21,12 +22,18 @@ defmodule TwitterWeb.RegisterController do
 
         conn
         |> put_flash(:info, "Already registered please sign in instead!")
-        |> render("index.html")
+        |> redirect(to: Routes.page_path(conn, :index, user_name: user_name))
       else
-        Register.reg(user_name, password)
+        if password1 == password2 do
+          Register.reg(user_name, password1)
 
-        conn
-        |> redirect(to: Routes.user_path(conn, :index, user_name: user_name))
+          conn
+          |> redirect(to: Routes.user_path(conn, :index, user_name: user_name))
+        else
+          conn
+          |> put_flash(:info, "Passwords do not match. Please try again")
+          |> render("index.html")
+        end
       end
   end
 end
