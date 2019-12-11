@@ -1,0 +1,18 @@
+<h1>Show Query</h1>
+
+<ul>
+
+  <li>
+    <strong>Search:</strong>
+    <%= @query.search %>
+  </li>
+
+  <li>
+    <strong>Posted:</strong>
+    <%= @query.posted %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.query_path(@conn, :edit, @query) %></span>
+<span><%= link "Back", to: Routes.query_path(@conn, :index) %></span>

@@ -41,4 +41,9 @@ defmodule CSA do
     Query.get_mentions(mention, name)
     {:reply, :ok, name}
   end
+
+  def handle_call({:searching, query}, _from, name) do
+    Query.get_my_results(query, name)
+    {:reply, :ok, name}
+  end
 end

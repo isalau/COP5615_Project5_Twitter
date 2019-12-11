@@ -1,0 +1,67 @@
+def new(conn, %{"user_name" => user_name} = params) do
+  changeset = Querys.change_query(%Query{})
+  render(conn, "new.html", changeset: changeset)
+end
+
+def create(conn, %{"query" => query_params}) do
+  case Querys.create_query(query_params) do
+    {:ok, query} ->
+      conn
+      |> put_flash(:info, "Query created successfully.")
+      |> redirect(to: Routes.query_path(conn, :show, query))
+
+    {:error, %Ecto.Changeset{} = changeset} ->
+      render(conn, "new.html", changeset: changeset)
+  end
+end
+
+def show(conn, %{"id" => id}) do
+  query = Querys.get_query!(id)
+  render(conn, "show.html", query: query)
+end
+
+def edit(conn, %{"id" => id}) do
+  query = Querys.get_query!(id)
+  changeset = Querys.change_query(query)
+  render(conn, "edit.html", query: query, changeset: changeset)
+end
+
+def update(conn, %{"id" => id, "query" => query_params}) do
+  query = Querys.get_query!(id)
+
+  case Querys.update_query(query, query_params) do
+    {:ok, query} ->
+      conn
+      |> put_flash(:info, "Query updated successfully.")
+      |> redirect(to: Routes.query_path(conn, :show, query))
+
+    {:error, %Ecto.Changeset{} = changeset} ->
+      render(conn, "edit.html", query: query, changeset: changeset)
+  end
+end
+
+def delete(conn, %{"id" => id}) do
+  query = Querys.get_query!(id)
+  {:ok, _query} = Querys.delete_query(query)
+
+  conn
+  |> put_flash(:info, "Query deleted successfully.")
+  |> redirect(to: Routes.query_path(conn, :index))
+end
+
+
+# <%= for query <- @querys do %>
+#     <tr>
+#       <td><%= query.search %></td>
+#       <td><%= query.posted %></td>
+#
+#       <td>
+#         <span><%= link "Show", to: Routes.query_path(@conn, :show, query) %></span>
+#         <span><%= link "Edit", to: Routes.query_path(@conn, :edit, query) %></span>
+#         <span><%= link "Delete", to: Routes.query_path(@conn, :delete, query), method: :delete, data: [confirm: "Are you sure?"] %></span>
+#       </td>
+#     </tr>
+# <% end %>
+
+
+<!-- <span><%= link "New Query", to: Routes.query_path(@conn, :new) %></span> -->

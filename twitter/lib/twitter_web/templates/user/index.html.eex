@@ -21,16 +21,29 @@
     margin: 0 auto;
     /* padding: 20px; */
   }
+  .searchbox {
+    width: 30%;
+    align="right"
+  }
+
 </style>
+<header>
+  <h1> <%= @username %></h1>
 
-<h1> <%= @username %></h1>
-<div align="right">
-  <%= form_for @conn, Routes.setting_path(@conn, :index, user_name: @username), fn f -> %>
-     <%= submit "Delete Account", class: "btn btn-primary" %>
-  <% end %>
+  <div class = "searchbox" align="right">
+    <%= form_for @conn, Routes.query_path(@conn, :index, user_name: @username), fn f -> %>
+    <%= submit "Search", class: "btn btn-primary" %>
+    <% end %>
+  </div>
 
-</div>
+  <div align="right">
+    <%= form_for @conn, Routes.setting_path(@conn, :index, user_name: @username), fn f -> %>
+       <%= submit "Delete Account", class: "btn btn-primary" %>
+    <% end %>
+  </div>
 
+</header>
+<body>
 <div class="tweetbox">
   <form>
 
@@ -62,3 +75,4 @@
   </div>
 </div>
 </div>
+</body>
