@@ -9,7 +9,12 @@ defmodule TwitterWeb.SettingController do
     render(conn, "index.html", setting: setting)
   end
 
-  def delete(conn, _params) do
+  def delete(conn, params) do
+    user_name = get_in(params, ["user_name"])
+    pid_sender = :"#{user_name}"
+    IO.inspect(pid_sender, label: "To Delete")
+    Delete.deleteUser(pid_sender)
+
     conn
     |> redirect(to: Routes.page_path(conn, :index))
   end

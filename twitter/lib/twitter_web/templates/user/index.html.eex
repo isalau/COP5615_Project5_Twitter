@@ -25,7 +25,10 @@
 
 <h1> <%= @username %></h1>
 <div align="right">
-  <a class="button" href="<%= Routes.setting_path(@conn, :index) %>">Settings</a></br>
+  <%= form_for @conn, Routes.setting_path(@conn, :index, user_name: @username), fn f -> %>
+     <%= submit "Delete Account", class: "btn btn-primary" %>
+  <% end %>
+
 </div>
 
 <div class="tweetbox">

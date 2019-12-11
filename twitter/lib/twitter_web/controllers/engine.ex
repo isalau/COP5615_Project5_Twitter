@@ -25,4 +25,12 @@ defmodule Engine do
     # Register.get_people(name,people)#HERE everyone is on everyone's list
     {:reply, {followers, subscribed, feed, tweets}, {followers, subscribed, feed, tweets}}
   end
+
+  def handle_call({:Unregister, name}, _from, {followers, subscribed, feed, tweets}) do
+    nm = Atom.to_string(name)
+    subscribed = subscribed -- [nm]
+    followers = List.keydelete(followers, name, 0)
+    # Register.get_people(name,people)#HERE everyone is on everyone's list
+    {:reply, {followers, subscribed, feed, tweets}, {followers, subscribed, feed, tweets}}
+  end
 end
