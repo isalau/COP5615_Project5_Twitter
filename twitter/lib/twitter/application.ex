@@ -18,6 +18,15 @@ defmodule Twitter.Application do
 
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
+
+    DySupervisor.start_link(1)
+    # Start the engine \
+    tweets = []
+    followers = []
+    subscribed = []
+    feed = []
+    {:ok, _pid} = Engine.start_link([followers, subscribed, feed, tweets, Engine])
+
     opts = [strategy: :one_for_one, name: Twitter.Supervisor]
     Supervisor.start_link(children, opts)
   end

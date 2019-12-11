@@ -9,12 +9,12 @@ defmodule Register do
       IO.puts("IN REGISTER")
       dpid = Process.whereis(DySupervisor)
 
-      if(dpid != nil) do
-        DySupervisor.start_link(1)
-        DySupervisor.start_child(name)
-      else
-        DySupervisor.start_child(name)
-      end
+      # if(dpid != nil) do
+      #   DySupervisor.start_link(1)
+      #   DySupervisor.start_child(name)
+      # else
+      DySupervisor.start_child(name)
+      # end
 
       # Start the CSSA
       tweets = []
@@ -27,8 +27,8 @@ defmodule Register do
       # Get password name key word pair list in place of followers
       pid = :"#{Engine}_cssa"
       {new_key_pass, new_subscribed, _, _} = GenServer.call(pid, {:register, name, pass})
-      # IO.inspect(new_key_pass, label: "The key pass list is")
-      # IO.inspect(new_subscribed, label: "The people's list is")
+      IO.inspect(new_key_pass, label: "The key pass list is")
+      IO.inspect(new_subscribed, label: "The people's list is")
       {new_key_pass, new_subscribed}
     end
   end
