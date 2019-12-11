@@ -17,11 +17,9 @@
 
 <%= form_for @conn, Routes.register_path(@conn, :register), fn f -> %>
    <div class="form-group">
-     <label>User Name:
-     <%= text_input f, :body, class: "control-label" %>
-       </label>
-     <label>Password:<%= password_input f, :body, class: "form-control" %></label>
-     <label>Confirm Password:<%= password_input f, :body, class: "form-control" %></label>
+     <label>User Name:<%= text_input f, :username, class: "control-label" %></label>
+     <label>Password:<%= password_input f, :password1, class: "form-control" %></label>
+     <label>Confirm Password:<%= password_input f, :password2, class: "form-control" %></label>
    </div>
    <%= submit "Submit", class: "btn btn-primary" %>
 <% end %>

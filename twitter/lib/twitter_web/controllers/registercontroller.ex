@@ -9,7 +9,16 @@ defmodule TwitterWeb.RegisterController do
     |> render("index.html")
   end
 
-  def register(conn, _params) do
+  def register(conn, params) do
+    user_name = get_in(params, ["username"])
+    IO.inspect(user_name, label: "USERNAME")
+
+    # %{
+    #   "_csrf_token" => "NAckbA4HK3c9LmEtVScJKyAjH1AjSBUrB2M9jCsNvV6B6ONlpsw6Ne_H",
+    #   "_utf8" => "✓",
+    #   "body" => "asdas"
+    # }
+
     # Register.reg(:username, :password)
 
     conn
