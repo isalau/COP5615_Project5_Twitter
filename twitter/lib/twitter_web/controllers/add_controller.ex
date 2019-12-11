@@ -4,14 +4,17 @@ defmodule TwitterWeb.AddController do
   alias Twitter.Adds
   alias Twitter.Adds.Add
 
-  def index(conn, _params) do
+  def index(conn, %{"user_name" => user_name} = params) do
     # add = Adds.list_add()
-    render(conn, "index.html")
+
+    # sender = Map.get(params, :user_name)
+    IO.inspect(user_name, label: "in add index")
+    render(conn, "index.html", user_name: user_name)
   end
 
-  def addSub(conn, params) do
-    IO.puts("in add sub")
-    sender = get_in(params, ["name"])
+  def addSub(conn, %{"user_name" => user_name} = params) do
+    sender = user_name
+    IO.inspect(sender, label: "in add sub")
     subs = get_in(params, ["tofollow"])
 
     {pass_users, tot_users, _, _} = :sys.get_state(:"#{Engine}_cssa")
@@ -28,11 +31,11 @@ defmodule TwitterWeb.AddController do
 
         conn
         |> put_flash(:info, "Sucess! Now subscribed to #{subs}")
-        |> redirect(to: Routes.add_path(conn, :index))
+        |> redirect(to: Routes.add_path(conn, :index, user_name: user_name))
       else
         conn
         |> put_flash(:info, "Person you are trying to subscribe does not exist")
-        |> redirect(to: Routes.add_path(conn, :index))
+        |> redirect(to: Routes.add_path(conn, :index, user_name: user_name))
       end
 
     add = Adds.list_add()

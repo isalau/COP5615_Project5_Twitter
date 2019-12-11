@@ -53,7 +53,7 @@
 </div>
 
   <div class="column">
-    <h3>Your Feed   <a class="button" href="<%= Routes.add_path(@conn, :index) %>">Add</a></h3>
+    <h3>Your Feed   <a class="button" href="<%= Routes.add_path(@conn, :index, user_name: @username) %>">Add</a></h3>
     <div class="listings">
 
     <%= for key <- connection_keys(@conn) do %>
