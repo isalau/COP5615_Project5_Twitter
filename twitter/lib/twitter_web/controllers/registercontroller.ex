@@ -13,6 +13,6 @@ defmodule TwitterWeb.RegisterController do
     # Register.reg(:username, :password)
 
     conn
-    |> redirect(to: Routes.user_path(@conn, :index))
+    |> redirect(to: Routes.user_path(conn, :index))
   end
 end
