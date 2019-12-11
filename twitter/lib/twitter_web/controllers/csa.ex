@@ -16,4 +16,29 @@ defmodule CSA do
 
     {:ok, name}
   end
+
+  def handle_call({:tweet, mssg}, _from, name) do
+    Tweet.send_tweet(name, mssg)
+    {:reply, :ok, name}
+  end
+
+  def handle_call({:subscribe, subs}, _from, name) do
+    Subscribe.subscribe(name, subs)
+    {:reply, :ok, name}
+  end
+
+  def handle_call({:retweet}, _from, name) do
+    Retweet.retweet(name)
+    {:reply, :ok, name}
+  end
+
+  def handle_call({:hashtag, hashtag}, _from, name) do
+    Query.get_hashtags(hashtag, name)
+    {:reply, :ok, name}
+  end
+
+  def handle_call({:mention, mention}, _from, name) do
+    Query.get_mentions(mention, name)
+    {:reply, :ok, name}
+  end
 end

@@ -1,36 +1,17 @@
-<h1>Listing Add</h1>
+<h1>Subscribe To Someone</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Tofollow</th>
+<%= form_for @conn, Routes.add_path(@conn, :addSub), fn f -> %>
 
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-<%= for add <- @add do %>
-    <tr>
-      <td><%= add.name %></td>
-      <td><%= add.tofollow %></td>
 
-      <td>
-        <span><%= link "Show", to: Routes.add_path(@conn, :show, add) %></span>
-        <span><%= link "Edit", to: Routes.add_path(@conn, :edit, add) %></span>
-        <span><%= link "Delete", to: Routes.add_path(@conn, :delete, add), method: :delete, data: [confirm: "Are you sure?"] %></span>
-      </td>
-    </tr>
+  <%= label f, :name %>
+  <%= text_input f, :name %>
+  <%= error_tag f, :name %>
+
+  <%= label f, :tofollow %>
+  <%= text_input f, :tofollow %>
+  <%= error_tag f, :tofollow %>
+
+  <div>
+    <%= submit "Save" %>
+  </div>
 <% end %>
-
-
-  </tbody>
-</table>
-
-<span><%= link "New Add", to: Routes.add_path(@conn, :new) %></span>
-
-<h3>Keys for the conn Struct</h3>
-
-  <%= for key <- connection_keys(@conn) do %>
-    <p><%= key %></p>
-  <% end %>

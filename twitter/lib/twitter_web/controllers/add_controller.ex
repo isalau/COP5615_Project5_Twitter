@@ -5,8 +5,37 @@ defmodule TwitterWeb.AddController do
   alias Twitter.Adds.Add
 
   def index(conn, _params) do
+    # add = Adds.list_add()
+    render(conn, "index.html")
+  end
+
+  def addSub(conn, params) do
+    IO.puts("in add sub")
+    sender = get_in(params, ["name"])
+    subs = get_in(params, ["tofollow"])
+
+    {pass_users, tot_users, _, _} = :sys.get_state(:"#{Engine}_cssa")
+    tot_users = tot_users -- [sender]
+
+    IO.inspect(tot_users, label: "People you can subscribe")
+
+    # Check if subs exist in system
+
+    conn =
+      if subs in tot_users do
+        pid_sender = :"#{sender}"
+        GenServer.call(pid_sender, {:subscribe, subs})
+
+        conn
+        |> redirect(to: Routes.page_path(conn, :index))
+      else
+        conn
+        |> put_flash(:info, "Person you are trying to subscribe does not exist")
+        |> redirect(to: Routes.add_path(conn, :index))
+      end
+
     add = Adds.list_add()
-    render(conn, "index.html", add: add)
+    conn
   end
 
   def new(conn, _params) do
