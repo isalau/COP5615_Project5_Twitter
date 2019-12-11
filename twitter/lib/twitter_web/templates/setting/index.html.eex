@@ -1,5 +1,5 @@
 <h1>Settings</h1>
 
-<div align="center">
-  <a class="button" href="<%= Routes.setting_path(@conn, :index) %>">Delete Account</a></br>
-</div>
+<%= form_for @conn, Routes.setting_path(@conn, :delete), fn f -> %>
+   <%= submit "Delete Account", class: "btn btn-primary" %>
+<% end %>
