@@ -2,6 +2,7 @@ defmodule DySupervisor do
   use DynamicSupervisor
 
   def start_link(init_arg) do
+    IO.puts("IN DYNAMIC SUPERVISOR")
     {:ok, _pid} = DynamicSupervisor.start_link(__MODULE__, init_arg, name: __MODULE__)
   end
 
