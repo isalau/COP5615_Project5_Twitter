@@ -15,17 +15,18 @@ defmodule TwitterWeb.RegisterController do
     # IO.inspect(user_name, label: "USERNAME")
     {_, all_users, _, _} = :sys.get_state(:"#{Engine}_cssa")
 
-    if user_name in all_users do
-      IO.puts("username already exists")
+    conn =
+      if user_name in all_users do
+        IO.puts("username already exists")
 
-      conn
-      |> put_flash(:info, "Already registered please sign in instead!")
-      |> render("index.html")
-    else
-      Register.reg(user_name, password)
-    end
+        conn
+        |> put_flash(:info, "Already registered please sign in instead!")
+        |> render("index.html")
+      else
+        Register.reg(user_name, password)
 
-    conn
-    |> redirect(to: Routes.user_path(conn, :index))
+        conn
+        |> redirect(to: Routes.user_path(conn, :index, user_name: user_name))
+      end
   end
 end

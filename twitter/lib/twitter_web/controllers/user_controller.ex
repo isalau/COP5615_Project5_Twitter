@@ -4,7 +4,17 @@ defmodule TwitterWeb.UserController do
   alias Twitter.Users
   alias Twitter.Users.User
 
-  def index(conn, _params) do
+  def index(conn, params) do
+    username = get_in(params, ["user_name"])
+    id = :"#{username}_cssa"
+    {followers, subscribed, feed, tweets} = :sys.get_state(id)
+
+    IO.inspect(id, label: "Your ID is ")
+    IO.inspect(followers, label: "Your followers are ")
+    IO.inspect(subscribed, label: "Your subscribed are ")
+    IO.inspect(feed, label: "Your feed is ")
+    IO.inspect(tweets, label: "Your tweets are ")
+
     user = Users.list_user()
     render(conn, "index.html", user: user)
   end
