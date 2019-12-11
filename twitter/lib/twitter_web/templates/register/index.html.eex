@@ -2,12 +2,9 @@
   <h2>Register</h2>
 </div> -->
 
-<div>
+<!-- <div>
   <form>
-  <!-- First name:<br>
-  <input type="text" name="firstname"><br>
-  Last name:<br>
-  <input type="text" name="lastname"> -->
+
   Username:<br>
   <input type="text" name="username">
   Password:<br>
@@ -16,4 +13,15 @@
   <input type="password" name="password2">
   <input type="submit" value="Submit">
 </form>
-</div>
+</div> -->
+
+<%= form_for @conn, Routes.register_path(@conn, :register), fn f -> %>
+   <div class="form-group">
+     <label>User Name:
+     <%= text_input f, :body, class: "control-label" %>
+       </label>
+     <label>Password:<%= password_input f, :body, class: "form-control" %></label>
+     <label>Confirm Password:<%= password_input f, :body, class: "form-control" %></label>
+   </div>
+   <%= submit "Submit", class: "btn btn-primary" %>
+<% end %>
