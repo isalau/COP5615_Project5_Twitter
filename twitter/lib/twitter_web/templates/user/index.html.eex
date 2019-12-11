@@ -23,7 +23,7 @@
   }
 </style>
 
-<h1> UserName</h1>
+<h1> <%= @username %></h1>
 <div align="right">
   <a class="button" href="<%= Routes.setting_path(@conn, :index) %>">Settings</a></br>
 </div>

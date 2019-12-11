@@ -16,7 +16,16 @@ defmodule TwitterWeb.UserController do
     IO.inspect(tweets, label: "Your tweets are ")
 
     user = Users.list_user()
-    render(conn, "index.html", user: user)
+
+    render(conn, "index.html",
+      user: user,
+      username: username,
+      id: id,
+      followers: followers,
+      subscribed: subscribed,
+      feed: feed,
+      tweets: tweets
+    )
   end
 
   def new(conn, _params) do
