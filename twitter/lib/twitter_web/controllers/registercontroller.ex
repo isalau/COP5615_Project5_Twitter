@@ -13,9 +13,9 @@ defmodule TwitterWeb.RegisterController do
     user_name = get_in(params, ["username"])
     password = get_in(params, ["password1"])
     # IO.inspect(user_name, label: "USERNAME")
-    {_, tot_users, _, _} = :sys.get_state(:"#{Engine}_cssa")
+    {_, all_users, _, _} = :sys.get_state(:"#{Engine}_cssa")
 
-    if user_name in tot_users do
+    if user_name in all_users do
       IO.puts("username already exists")
 
       conn
