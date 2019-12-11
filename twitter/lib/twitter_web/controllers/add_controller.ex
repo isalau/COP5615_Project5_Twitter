@@ -27,7 +27,8 @@ defmodule TwitterWeb.AddController do
         GenServer.call(pid_sender, {:subscribe, subs})
 
         conn
-        |> redirect(to: Routes.page_path(conn, :index))
+        |> put_flash(:info, "Sucess! Now subscribed to #{subs}")
+        |> redirect(to: Routes.add_path(conn, :index))
       else
         conn
         |> put_flash(:info, "Person you are trying to subscribe does not exist")
