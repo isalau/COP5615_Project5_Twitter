@@ -29,6 +29,7 @@ defmodule TwitterWeb.Router do
     post "/setting", SettingController, :delete
     # resources "/setting", SettingController
     resources "/add", AddController
+    resources "/example", ExampleController
 
     # get "/*thing", PageController, :wildcard
   end

@@ -1,0 +1,18 @@
+<h1>Show Example</h1>
+
+<ul>
+
+  <li>
+    <strong>Body:</strong>
+    <%= @example.body %>
+  </li>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @example.name %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.example_path(@conn, :edit, @example) %></span>
+<span><%= link "Back", to: Routes.example_path(@conn, :index) %></span>
