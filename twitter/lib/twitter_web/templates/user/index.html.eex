@@ -64,26 +64,25 @@
 
 </header>
 <body>
-<div class="tweetbox">
-  <form>
-
-  Tweet:<br>
-  <input type="text" name="tweettext">
-
-  <input class ="button" type="submit" value="Submit" style="float: right;">
-  </form>
-</div>
-
-
-<div class="row">
-  <div class="column">
-    <h3>Your Tweets</h3>
-    <div class="listings">
-    <%= for key <- connection_keys(@conn) do %>
-      <%= render("tweets.html", key: key) %>
-    <% end %>
+  <div class="tweetbox">
+  <%= form_for @conn, Routes.tweet_path(@conn, :tweet, user_name: @username ), fn f -> %>
+     <div class="form-group">
+       <label>Tweet:<%= text_input f, :tweet_text, class: "control-label" %></label>
+      </div>
+     <%= submit "Submit", class: "btn btn-primary" %>
+  <% end %>
   </div>
-</div>
+
+
+  <div class="row">
+    <div class="column">
+      <h3>Your Tweets</h3>
+      <div class="listings">
+      <%= for key <- get_keys(@username) do %>
+        <%= render("tweets.html", key: key) %>
+      <% end %>
+    </div>
+  </div>
 
   <div class="column">
     <h3>Your Feed   <a class="button" href="<%= Routes.add_path(@conn, :index, user_name: @username) %>" style="float: right;">Add</a></h3>
