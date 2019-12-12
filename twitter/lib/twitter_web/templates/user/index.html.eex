@@ -73,7 +73,6 @@
   <% end %>
   </div>
 
-
   <div class="row">
     <div class="column">
       <h3>Your Tweets</h3>
@@ -90,12 +89,15 @@
 
   <div class="column">
     <h3>Your Feed   <a class="button" href="<%= Routes.add_path(@conn, :index, user_name: @username) %>" style="float: right;">Add</a></h3>
-    <div class="listings">
-
-    <%= for key <- connection_keys(@conn) do %>
-      <%= render("feed.html", key: key) %>
-    <% end %>
-  </div>
+    <div class="qresults">
+      <%= if @feed != nil do %>
+        <p><%= @feed %></p>
+        <%= for key <- @feed do %>
+          <%= render("tweets.html", key: key) %>
+        <% end %>
+        <%= else %>
+      <% end %>
+    </div>
 </div>
 </div>
 </body>

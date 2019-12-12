@@ -31,7 +31,7 @@ defmodule TwitterWeb.AddController do
 
         conn
         |> put_flash(:info, "Sucess! Now subscribed to #{subs}")
-        |> redirect(to: Routes.add_path(conn, :index, user_name: user_name))
+        |> redirect(to: Routes.user_path(conn, :index, user_name: user_name))
       else
         conn
         |> put_flash(:info, "Person you are trying to subscribe does not exist")
