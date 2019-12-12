@@ -1,5 +1,6 @@
 defmodule TwitterWeb.UserController do
   use TwitterWeb, :controller
+  import Plug.Conn
 
   alias Twitter.Users
   alias Twitter.Users.User
@@ -16,6 +17,7 @@ defmodule TwitterWeb.UserController do
     IO.inspect(tweets, label: "Your tweets are ")
 
     user = Users.list_user()
+    # TwitterWeb.UName.uname(conn, username)
 
     render(conn, "index.html",
       user: user,

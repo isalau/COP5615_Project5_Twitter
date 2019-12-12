@@ -33,8 +33,7 @@ defmodule TwitterWeb.Router do
     post "/add", AddController, :addSub
     resources "/example", ExampleController
     get "/querys", QueryController, :index
-    post "/querys", QueryController, :index
-    post "/querys", QueryController, :query
+    post "/querys", QueryController, :test
     # resources "/querys", QueryController
 
     # get "/*thing", PageController, :wildcard

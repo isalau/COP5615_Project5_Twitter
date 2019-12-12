@@ -1,5 +1,6 @@
 defmodule Query do
   def get_my_results(query, my_id) do
+    IO.puts("in get my results")
     queryLength = String.length(query)
 
     if(queryLength == 0 || query == " ") do
@@ -30,6 +31,7 @@ defmodule Query do
 
   def get_my_feed(my_id) do
     # Get the list of subscribers
+    IO.puts("in get my feed")
     id = :"#{my_id}_cssa"
     {_, my_subscribed, _, _} = :sys.get_state(id)
     # Get each Subscribers tweets list and add it to my feed list
@@ -47,6 +49,7 @@ defmodule Query do
   end
 
   def get_hashtags(hashtag, my_id) do
+    IO.puts("in get hashtags")
     pid = :"#{Engine}_cssa"
     id = :"#{my_id}_cssa"
 
@@ -80,6 +83,7 @@ defmodule Query do
   end
 
   def get_mentions(mention, my_id) do
+    IO.puts("in get mentions")
     pid = :"#{Engine}_cssa"
     id = :"#{my_id}_cssa"
     {_, people, _, _} = :sys.get_state(pid)

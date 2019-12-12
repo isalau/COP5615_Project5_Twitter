@@ -1,8 +1,7 @@
 <h1>Search</h1>
-<%= form_for @conn, Routes.query_path(@conn, :query, user_name: @user_name), fn f -> %>
-
-  <%= text_input f, :toSearch %>
-  <div>
-    <%= submit "Search" %>
-  </div>
+<h1>Results</h1>
+<p>UserName: <%= @user_name %></p>
+<%= form_for @conn, Routes.query_path(@conn, :test, user_name: @user_name), fn f -> %>
+  <%= text_input f, :query %>
+  <%= submit "Search" %>
 <% end %>

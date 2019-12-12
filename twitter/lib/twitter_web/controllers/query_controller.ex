@@ -1,17 +1,22 @@
 defmodule TwitterWeb.QueryController do
   use TwitterWeb, :controller
+  import TwitterWeb.UName
 
   alias Twitter.Querys
   alias Twitter.Querys.Query
 
   def index(conn, %{"user_name" => user_name} = params) do
-    # querys = Querys.list_querys()
+    IO.inspect(user_name, label: "in add index")
     render(conn, "index.html", user_name: user_name)
+    # query = get_in(params, ["query"])
+    # user_name = get_in(params, ["user_name"])
+    # IO.inspect(query, label: "#{user_name} in index")
+    # # show results
+    #
   end
 
-  def query(conn, %{"user_name" => user_name} = params) do
-    query = get_in(params, ["toSearch"])
-    IO.inspect(query, label: "In query")
+  def test(conn, %{"user_name" => user_name} = params) do
+    query = get_in(params, ["query"])
     pid_sender = :"#{user_name}"
 
     # person
@@ -29,6 +34,6 @@ defmodule TwitterWeb.QueryController do
       end
     end
 
-    render(conn, "index.html")
+    render(conn, "index.html", user_name: user_name)
   end
 end
