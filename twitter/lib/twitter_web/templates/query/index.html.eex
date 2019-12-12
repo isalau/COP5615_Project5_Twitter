@@ -61,12 +61,15 @@
 
 <h1>Results</h1>
   <div class="qresults">
-    <% if @results != nil do %>
-    <p>RESULTS FOUND</p>
+    <p>RESULTS ABOVE</p>
+    <%= if @results != nil do %>
+      <p>RESULTS FOUND</p>
       <p><%= @results %></p>
       <%= for key <- @results do %>
-        <p><%= key %></p>
+        <%= render("query.html", key: key) %>
       <% end %>
+      <%= else %>
+        <p>RESULTS ELSE</p>
     <% end %>
   </div>
 </div>

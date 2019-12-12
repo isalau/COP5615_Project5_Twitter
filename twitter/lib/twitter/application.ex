@@ -26,9 +26,42 @@ defmodule Twitter.Application do
     subscribed = []
     feed = []
     {:ok, _pid} = Engine.start_link([followers, subscribed, feed, tweets, Engine])
-    # runSimulation(5, 5)
+    runSimulation(5, 5)
     opts = [strategy: :one_for_one, name: Twitter.Supervisor]
     Supervisor.start_link(children, opts)
+  end
+
+  def runSimulation(num_user, num_msg) do
+    # get number of users --> makeKids(numUsers)
+    Register.makeKids(num_user, "pwd")
+    # get number of fake tweets --> makeFakeTweets(numTweets)
+    testTweets_db = []
+    testTweets = makeFakeTweets(num_msg, testTweets_db)
+    # subscribe
+    Subscribe.subscribeMany(num_user)
+    # IO.inspect(testTweets, label: "test Tweets")
+    Tweet.sendManyTweets(num_msg, testTweets)
+
+    # sends that many tweets per user
+    # re-tweet
+    # query
+    # feed
+  end
+
+  def makeFakeTweets(num, testTweets_db) when num > 1 do
+    numm = Integer.to_string(num)
+    numtweet = String.replace_suffix("tweet x", " x", numm)
+    testTweet = "Test #{numtweet}"
+    testTweets_db = testTweets_db ++ [testTweet]
+    newNum = num - 1
+    makeFakeTweets(newNum, testTweets_db)
+  end
+
+  def makeFakeTweets(num, testTweets_db) do
+    numm = Integer.to_string(num)
+    numtweet = String.replace_suffix("tweet x", " x", numm)
+    testTweet = "Test #{numtweet}"
+    _testTweets_db = testTweets_db ++ [testTweet]
   end
 
   # Tell Phoenix to update the endpoint configuration

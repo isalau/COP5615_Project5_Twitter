@@ -30,53 +30,54 @@ defmodule Tweet do
       # IO.inspect(feed, label: "My #{elem} news feeds after getting the tweet")
     end
   end
+
+  # end
+
+  def sendManyTweets(num, tweets_db) do
+    # for every user
+    pid = :"#{Engine}_cssa"
+    all_users = GenServer.call(pid, {:getAllUsers})
+
+    for user <- all_users do
+      # send num amount of tweets
+      simtweet(user, num, tweets_db)
+    end
+  end
+
+  def simtweet(user, num, tweets_db) when num > 1 do
+    # IO.puts("#{user} sending tweet")
+    pid_user = :"#{user}"
+    # from tweets_db
+    numOfTweetsInDb = length(tweets_db)
+
+    if num < numOfTweetsInDb do
+      tweet = Enum.at(tweets_db, num)
+      Tweet.send_tweet(pid_user, tweet)
+      # GenServer.call(pid_user, {:tweet, tweet})
+    else
+      mod = Integer.mod(num, numOfTweetsInDb)
+      tweet = Enum.at(tweets_db, mod)
+      Tweet.send_tweet(pid_user, tweet)
+      # GenServer.call(pid_user, {:tweet, tweet})
+    end
+
+    num = num - 1
+    simtweet(user, num, tweets_db)
+  end
+
+  def simtweet(user, num, tweets_db) do
+    # IO.puts("#{user} sending tweet")
+    pid_user = :"#{user}"
+    # from tweets_db
+    numOfTweetsInDb = length(tweets_db)
+
+    if num < numOfTweetsInDb do
+      tweet = Enum.at(tweets_db, num)
+      GenServer.call(pid_user, {:tweet, tweet})
+    else
+      mod = Integer.mod(num, numOfTweetsInDb)
+      tweet = Enum.at(tweets_db, mod)
+      GenServer.call(pid_user, {:tweet, tweet})
+    end
+  end
 end
-
-#   def sendManyTweets(num, tweets_db) do
-#     # for every user
-#     pid = :"#{Engine}_cssa"
-#     all_users = GenServer.call(pid, {:getAllUsers})
-
-#     for user <- all_users do
-#       # send num amount of tweets
-#       simtweet(user, num, tweets_db)
-#     end
-#   end
-
-#   def simtweet(user, num, tweets_db) when num > 1 do
-#     # IO.puts("#{user} sending tweet")
-#     pid_user = :"#{user}"
-#     # from tweets_db
-#     numOfTweetsInDb = length(tweets_db)
-
-#     if num < numOfTweetsInDb do
-#       tweet = Enum.at(tweets_db, num)
-#       Tweet.send_tweet(pid_user, tweet)
-#       # GenServer.call(pid_user, {:tweet, tweet})
-#     else
-#       mod = Integer.mod(num, numOfTweetsInDb)
-#       tweet = Enum.at(tweets_db, mod)
-#       Tweet.send_tweet(pid_user, tweet)
-#       # GenServer.call(pid_user, {:tweet, tweet})
-#     end
-
-#     num = num - 1
-#     simtweet(user, num, tweets_db)
-#   end
-
-#   def simtweet(user, num, tweets_db) do
-#     # IO.puts("#{user} sending tweet")
-#     pid_user = :"#{user}"
-#     # from tweets_db
-#     numOfTweetsInDb = length(tweets_db)
-
-#     if num < numOfTweetsInDb do
-#       tweet = Enum.at(tweets_db, num)
-#       GenServer.call(pid_user, {:tweet, tweet})
-#     else
-#       mod = Integer.mod(num, numOfTweetsInDb)
-#       tweet = Enum.at(tweets_db, mod)
-#       GenServer.call(pid_user, {:tweet, tweet})
-#     end
-#   end
-# end

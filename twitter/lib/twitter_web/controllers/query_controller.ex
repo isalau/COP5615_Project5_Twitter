@@ -8,6 +8,8 @@ defmodule TwitterWeb.QueryController do
   def index(conn, params) do
     user_name = get_in(params, ["user_name"])
     results = get_in(params, ["results"])
+    IO.inspect(user_name, label: "In Query user_name")
+    IO.inspect(results, label: "In Query results")
     render(conn, "index.html", user_name: user_name, results: results)
   end
 
@@ -33,6 +35,8 @@ defmodule TwitterWeb.QueryController do
       end
 
     IO.inspect(r, label: "results")
-    render(conn, "index.html", %{user_name: user_name, results: r})
+    # |> redirect("index.html", %{user_name: user_name, results: r})
+    conn
+    |> redirect(to: Routes.query_path(conn, :index, user_name: user_name, results: r))
   end
 end
