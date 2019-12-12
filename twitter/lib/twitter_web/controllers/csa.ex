@@ -27,10 +27,10 @@ defmodule CSA do
     {:reply, :ok, name}
   end
 
-  def handle_call({:retweet}, _from, name) do
-    Retweet.retweet(name)
-    {:reply, :ok, name}
-  end
+  # def handle_call({:retweet}, _from, name) do
+  #   # Retweet.retweet(name)
+  #   {:reply, :ok, name}
+  # end
 
   def handle_call({:hashtag, hashtag}, _from, name) do
     Query.get_hashtags(hashtag, name)

@@ -1,0 +1,38 @@
+<style>
+
+  h3 {
+    text-align: center;
+  }
+  .retweetbox {
+  border-style: solid;
+  border-width: 3px;
+  border-radius: 5px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin-bottom: 50px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+  .listings {
+    text-align: center;
+  }
+
+</style>
+<h1> YOUR FEED </h1>
+
+<div class="listings">
+  <ol type = "1">
+    <%= for key <- get_retweet(@username) do %>
+      <%= render("retweets.html", key: key) %>
+    <% end %>
+  </ol>
+</div>
+
+<div class="retweetbox">
+<%= form_for @conn, Routes.retweet_path(@conn, :retweet, user_name: @username ), fn f -> %>
+   <div class="form-group">
+     <label>Choose a number:<%= text_input f, :tweet_num, class: "control-label" %></label>
+    </div>
+   <%= submit "Submit", class: "btn btn-primary" %>
+<% end %>
+</div>

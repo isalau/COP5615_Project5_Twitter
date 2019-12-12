@@ -24,6 +24,8 @@ defmodule TwitterWeb.Router do
     resources "/events", EventController
     post "/user", TweetController, :tweet
     resources "/user", UserController
+    get "/retweet", RetweetController, :index
+    post "/retweet", RetweetController, :retweet
     get "/setting", SettingController, :index
     post "/setting", SettingController, :delete
     # resources "/setting", SettingController

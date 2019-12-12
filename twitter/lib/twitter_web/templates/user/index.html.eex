@@ -84,6 +84,10 @@
     </div>
   </div>
 
+  <div align="left">
+  <a class="button" href="<%= Routes.retweet_path(@conn, :index,user_name: @username) %>">Retweet</a></br>
+</div>
+
   <div class="column">
     <h3>Your Feed   <a class="button" href="<%= Routes.add_path(@conn, :index, user_name: @username) %>" style="float: right;">Add</a></h3>
     <div class="listings">
