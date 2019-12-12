@@ -60,10 +60,12 @@
 <% end %>
 
 <h1>Results</h1>
-  <div class="listings">
+  <div class="qresults">
     <% if @results != nil do %>
+    <p>RESULTS FOUND</p>
+      <p><%= @results %></p>
       <%= for key <- @results do %>
-        <%= render("tweets.html", key: key) %>
+        <p><%= key %></p>
       <% end %>
     <% end %>
   </div>

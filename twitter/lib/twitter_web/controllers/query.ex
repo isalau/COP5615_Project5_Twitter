@@ -3,30 +3,35 @@ defmodule Query do
     IO.puts("in get my results")
     queryLength = String.length(query)
 
-    if(queryLength == 0 || query == " ") do
-      IO.puts("You cannot query an empty string")
-      :EmptyQuery
-    else
-      id = :"#{my_id}_cssa"
-      feedList = GenServer.call(id, {:get_feed})
-      # IO.inspect(feedList, label: "feedList")
+    results =
+      if(queryLength == 0 || query == " ") do
+        IO.puts("You cannot query an empty string")
+        :EmptyQuery
+      else
+        IO.inspect("searching for tweet")
+        id = :"#{my_id}_cssa"
+        feedList = GenServer.call(id, {:get_feed})
+        IO.inspect(feedList, label: "feedList")
 
-      # # for every value in the feedlist, search the tweet than search the username
-      # # if something interesting is found append it to results
-      #
-      results = []
+        # # for every value in the feedlist, search the tweet than search the username
+        # # if something interesting is found append it to results
+        #
+        results = []
 
-      results =
-        for tweet <- feedList do
-          _r =
-            if(String.contains?(tweet, query) == true) do
-              # IO.inspect(tweet, label: "Found")
-              _results = results ++ tweet
-            end
-        end
+        results =
+          for tweet <- feedList do
+            _r =
+              if(String.contains?(tweet, query) == true) do
+                IO.inspect(tweet, label: "Found")
+                _results = results ++ tweet
+              end
+          end
 
-      _results = List.flatten(Enum.filter(results, fn x -> x != nil end))
-    end
+        _results = List.flatten(Enum.filter(results, fn x -> x != nil end))
+      end
+
+    IO.inspect(results, label: "in get my results, results")
+    results
   end
 
   def get_my_feed(my_id) do

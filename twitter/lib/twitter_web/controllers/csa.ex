@@ -43,7 +43,7 @@ defmodule CSA do
   end
 
   def handle_call({:searching, query}, _from, name) do
-    Query.get_my_results(query, name)
-    {:reply, :ok, name}
+    results = Query.get_my_results(query, name)
+    {:reply, results, name}
   end
 end
