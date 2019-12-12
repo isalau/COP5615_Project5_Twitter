@@ -1,18 +1,29 @@
 <style>
 
+  header {
+    /* background-color: #2e86ab; */
+    margin: 0 auto;
+    width: 50%;
+  }
+
+  body {
+    /* background-color: #2e86ab; */
+    margin: 0 auto;
+    width: 50%;
+  }
   h3 {
     text-align: center;
   }
   .tweetbox {
-  border-style: solid;
-  border-width: 3px;
-  border-radius: 5px;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  margin-bottom: 50px;
-  padding-left: 20px;
-  padding-right: 20px;
-}
+    border-style: solid;
+    border-width: 3px;
+    border-radius: 5px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-bottom: 50px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
   .listings {
     text-align: center;
   }
@@ -24,6 +35,16 @@
   .searchbox {
     width: 30%;
     align="right"
+  }
+  .button{
+    float: right;
+    font-size: 1.4rem;
+    height: 4.5rem;
+    line-height: 4.5rem;
+    padding: 0 2rem;
+    width: 20rem;
+    background-color:#2e86ab;
+    border: 2px solid #2e86ab;
   }
 </style>
 
@@ -37,7 +58,7 @@
 
   <div align="right">
     <%= form_for @conn, Routes.setting_path(@conn, :index, user_name: @username), fn f -> %>
-       <%= submit "Delete Account", class: "btn btn-primary" %>
+       <%= submit "Delete Account", class: "button" %>
     <% end %>
   </div>
 
@@ -49,7 +70,7 @@
   Tweet:<br>
   <input type="text" name="tweettext">
 
-  <input type="submit" value="Submit" style="float: right;">
+  <input class ="button" type="submit" value="Submit" style="float: right;">
   </form>
 </div>
 
@@ -65,7 +86,7 @@
 </div>
 
   <div class="column">
-    <h3>Your Feed   <a class="button" href="<%= Routes.add_path(@conn, :index, user_name: @username) %>">Add</a></h3>
+    <h3>Your Feed   <a class="button" href="<%= Routes.add_path(@conn, :index, user_name: @username) %>" style="float: right;">Add</a></h3>
     <div class="listings">
 
     <%= for key <- connection_keys(@conn) do %>
