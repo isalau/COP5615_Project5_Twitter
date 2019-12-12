@@ -5,9 +5,12 @@ defmodule TwitterWeb.QueryController do
   alias Twitter.Querys
   alias Twitter.Querys.Query
 
-  def index(conn, %{"user_name" => user_name} = params) do
+  def index(conn, params) do
+    user_name = get_in(params, ["user_name"])
+    results = get_in(params, ["results"])
     IO.inspect(user_name, label: "in add index")
-    render(conn, "index.html", user_name: user_name)
+
+    render(conn, "index.html", user_name: user_name, results: results)
     # query = get_in(params, ["query"])
     # user_name = get_in(params, ["user_name"])
     # IO.inspect(query, label: "#{user_name} in index")
@@ -20,20 +23,21 @@ defmodule TwitterWeb.QueryController do
     pid_sender = :"#{user_name}"
 
     # person
-    if String.contains?(query, "@") do
-      mention = query
-      GenServer.call(pid_sender, {:mention, mention})
-    else
-      # hashtag
-      if String.contains?(query, "#") do
-        hashtag = query
-        GenServer.call(pid_sender, {:hashtag, hashtag})
+    results =
+      if String.contains?(query, "@") do
+        mention = query
+        GenServer.call(pid_sender, {:mention, mention})
       else
-        # word or phrase
-        GenServer.call(pid_sender, {:searching, query})
+        # hashtag
+        if String.contains?(query, "#") do
+          hashtag = query
+          GenServer.call(pid_sender, {:hashtag, hashtag})
+        else
+          # word or phrase
+          GenServer.call(pid_sender, {:searching, query})
+        end
       end
-    end
 
-    render(conn, "index.html", user_name: user_name)
+    render(conn, "index.html", user_name: user_name, results: results)
   end
 end

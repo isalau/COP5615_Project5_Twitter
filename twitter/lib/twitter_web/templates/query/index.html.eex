@@ -1,7 +1,7 @@
 <style>
 
   body {
-    background-color: #2e86ab;
+    /* background-color: #2e86ab; */
   }
   h1{
     padding-top: 10rem;
@@ -20,6 +20,20 @@
     padding: 5rem;
     margin: 0 auto;
     width: 40%;
+  }
+  .tfield{
+    background-color:#38686a;
+  }
+
+  .btn {
+    float:right;
+    font-size: 1.4rem;
+    height: 4.5rem;
+    line-height: 4.5rem;
+    padding: 0 2rem;
+    width: 40rem;
+    background-color:#2e86ab;
+    border: 2px solid #2e86ab;
   }
   .button-large {
     font-size: 1.4rem;
@@ -40,11 +54,17 @@
 
 <div class="centerplease">
 <h1>Search</h1>
-
-<p>UserName: <%= @user_name %></p>
 <%= form_for @conn, Routes.query_path(@conn, :test, user_name: @user_name), fn f -> %>
-  <%= text_input f, :query %>
-  <%= submit "Search" %>
+  <%= text_input f, :query, class: "tfield" %>
+  <%= submit "Search", class: "btn"%>
 <% end %>
+
 <h1>Results</h1>
+  <div class="listings">
+    <% if @results != nil do %>
+      <%= for key <- @results do %>
+        <%= render("tweets.html", key: key) %>
+      <% end %>
+    <% end %>
+  </div>
 </div>

@@ -17,11 +17,13 @@ defmodule TwitterWeb.UserController do
     IO.inspect(tweets, label: "Your tweets are ")
 
     user = Users.list_user()
+    results = []
     # TwitterWeb.UName.uname(conn, username)
 
     render(conn, "index.html",
       user: user,
       username: username,
+      results: results,
       id: id,
       followers: followers,
       subscribed: subscribed,

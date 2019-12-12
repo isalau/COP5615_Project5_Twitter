@@ -53,7 +53,7 @@
   <h1> <%= @username %></h1>
 
   <div>
-    <a class="button" href="<%= Routes.query_path(@conn, :index, user_name: @username) %>">Search</a>
+    <a class="button" href="<%= Routes.query_path(@conn, :index, user_name: @username, results: @results) %>">Search</a>
   </div>
 
   <div align="right">
