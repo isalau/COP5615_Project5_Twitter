@@ -1,25 +1,58 @@
-<!-- <div class="phx-hero">
-  <h2>Register</h2>
-</div> -->
+<style>
 
-<!-- <div>
-  <form>
+  body {
+    background-color: #2e86ab;
+  }
+  h1{
+    padding-top: 10rem;
+    text-align: center;
+  }
 
-  Username:<br>
-  <input type="text" name="username">
-  Password:<br>
-  <input type="password" name="password1">
-  Please Confirm Password:<br>
-  <input type="password" name="password2">
-  <input type="submit" value="Submit">
-</form>
-</div> -->
+  h2{
+    text-align: center;
+  }
+  .centerplease {
+    background-color:#cdc6ae;
+    margin: 0 auto;
+    width: 50%;
+    padding: 10rem;
+  }
+
+  .user_input{
+    background-color: #cdc6ae
+  }
+  .selections{
+    background-color:#cdc6ae;
+    padding: 5rem;
+    margin: 0 auto;
+    width: 40%;
+  }
+  .button{
+    float: right;
+    font-size: 1.4rem;
+    height: 4.5rem;
+    line-height: 4.5rem;
+    padding: 0 2rem;
+    width: 20rem;
+    background-color:#2e86ab;
+    border: 2px solid #2e86ab;
+  }
+  .button:hover {
+  background-image:none;
+  background-color:#38686a;
+  border: 2px solid #38686a;
+  }
+</style>
+
+<div class="centerplease">
 
 <%= form_for @conn, Routes.register_path(@conn, :register), fn f -> %>
    <div class="form-group">
-     <label>User Name:<%= text_input f, :username, class: "control-label" %></label>
-     <label>Password:<%= password_input f, :password1, class: "form-control" %></label>
-     <label>Confirm Password:<%= password_input f, :password2, class: "form-control" %></label>
+     <label class: "user_input">User Name:<%= text_input f, :username, class: "control-label" %></label>
+     <label class: "user_input">Password:<%= password_input f, :password1, class: "form-control" %></label>
+     <label class: "user_input">Confirm Password:<%= password_input f, :password2, class: "form-control" %></label>
    </div>
-   <%= submit "Submit", class: "btn btn-primary" %>
+   <%= submit "Submit", class: "button" %>
 <% end %>
+
+</div>

@@ -1,3 +1,22 @@
+<style>
+.alert.alert-info{
+  background-color: #bd9391;
+  border: 2px solid #bd9391;
+  margin: 0 auto;
+  width: 50%;
+  margin-top: 5rem;
+  margin-bottom: 5rem;
+}
+
+.alert.alert-danger{
+  background-color: #bd9391;
+  border: 2px solid #bd9391;
+  margin: 0 auto;
+  width: 50%;
+  margin-top: 5rem;
+  margin-bottom: 5rem;
+}
+</style>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -8,9 +27,7 @@
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
   </head>
   <body>
-    
     <main role="main" class="container">
-
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
       <%= render @view_module, @view_template, assigns %>

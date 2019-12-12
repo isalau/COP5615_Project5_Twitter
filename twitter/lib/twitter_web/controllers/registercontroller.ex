@@ -28,6 +28,7 @@ defmodule TwitterWeb.RegisterController do
           Register.reg(user_name, password1)
 
           conn
+          |> put_session(:current_user_id, user_name)
           |> redirect(to: Routes.user_path(conn, :index, user_name: user_name))
         else
           conn
