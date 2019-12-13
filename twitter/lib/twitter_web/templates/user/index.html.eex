@@ -6,6 +6,7 @@
     width: 80%;
   }
   h1{
+    color:#38686a;
     float: left;
     margin-top: 10rem;
     text-align: center;
@@ -16,18 +17,19 @@
     margin-top: 10rem;
     text-align: center;
     position:relative;
+    border-bottom: 2px solid #38686a;
+
   }
   .allthebuttons{
-    float: right;
-    /* margin-top: 10rem; */
+    float: left;
     position:relative;
   }
   .topad{
     margin: 1rem;
   }
   .btn{
-    background-color:#0069d9;
-    border:0.1rem solid #0069d9;
+    background-color:#2e86ab;
+    border:0.1rem solid #2e86ab;
     border-radius:.4rem;
     color:#fff;
     cursor:pointer;
@@ -54,32 +56,27 @@
   }
   .button:hover {
     background-image:none;
-    background-color:#38686a;
-    border: 2px solid #38686a;
+    background-color:#2e86ab;
+    border: 2px solid #2e86ab;
   }
   .tweets{
     border-right: 2px solid #38686a;
-    border-bottom: 2px solid #38686a;
   }
   .feed{
-    border-bottom: 2px solid #38686a;
+    border-left: 2px solid #38686a;
   }
 </style>
 
 <%= if TwitterWeb.Auth.signed_in?(@conn) do %>
 <body>
   <div class = "row">
+    <div class = "column">
+      </div>
+      <div class = "column">
   <h1>Hi <%=  @username %>! What's on your mind?</h1>
+</div>
   </div>
   <div class = "row">
-    <div class = "column">
-      <div class="tweetbox">
-        <%= form_for @conn, Routes.tweet_path(@conn, :tweet, user_name: @username ), fn f -> %>
-          <%= text_input f, :tweet_text%>
-          <%= submit "Tweet", class: "button sub"%>
-        <% end %>
-      </div>
-    </div>
     <div class = "column">
       <div class="allthebuttons">
         <div class="topad">
@@ -101,11 +98,20 @@
         </div>
       </div>
     </div>
+
+    <div class = "column">
+      <div class="tweetbox">
+        <%= form_for @conn, Routes.tweet_path(@conn, :tweet, user_name: @username ), fn f -> %>
+          <%= text_input f, :tweet_text%>
+          <%= submit "Tweet", class: "btn sub"%>
+        <% end %>
+      </div>
+    </div>
   </div>
   <div class="row">
     <div class="column">
-      <h3>Your Tweets</h3>
       <div class="tweets">
+      <h3>Your Tweets</h3>
         <%= for key <- get_keys(@username) do %>
           <%= render("tweets.html", key: key) %>
           <% end %>
@@ -115,7 +121,7 @@
     <div class="column">
       <div class ="feed">
       <h3>Your Feed   </h3>
-    </div>
+
       <div class="qresults">
         <%= if @feed != nil do %>
           <%= for key <- @feed do %>
@@ -124,6 +130,7 @@
           <%= else %>
         <% end %>
       </div>
+    </div>
     </div>
   </div>
 </div>
