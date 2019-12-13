@@ -106,7 +106,7 @@
 
     <div class = "column">
       <div class="tweetbox" >
-        <%= form_for @conn, Routes.tweet_path(@conn, :tweet, user_name: @username ), [id: "new-message"], fn f -> %>
+        <%= form_for @conn, Routes.tweet_path(@conn, :tweet, user_name: @username), [id: "new-message"], fn f -> %>
           <%= text_input f, :tweet_text, [id: "message-content"]%>
           <%= submit "Tweet", class: "btn sub"%>
         <% end %>

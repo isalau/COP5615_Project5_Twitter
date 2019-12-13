@@ -80,7 +80,7 @@ if (channelRoomId) {
 
 const renderMessage = function(message) {
   let messageTemplate = `
-      ${message.content}
+      <p>${message.content}</p>
   `
   document.querySelector("#yourfeed").innerHTML += messageTemplate
 };
@@ -107,6 +107,10 @@ if (subRoomId) {
   channel.on(`room:${subRoomId}:new_message`, (message) => {
     console.log("message", message)
     renderMessage(message)
+    sender = get_in(params, ["user_name"])
+    IO.inspect(sender, label: "Im sending the tweet0")
+    tweet = get_in(params, ["tweet_text"])
+    Tweet.send_tweet(sender, tweet, conn)
   });
 }
 
