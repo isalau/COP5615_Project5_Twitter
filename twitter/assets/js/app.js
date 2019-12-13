@@ -16,5 +16,7 @@ import "phoenix_html"
 // Local files can be imported directly using relative paths, for example:
 import socket from "./socket"
 var msglist = document.getElementById("msglist");
-var show = msglist.getAttribute("data-uname");
-console.log("name " + show)
+var room = msglist.getAttribute("data-uname");
+console.log("name " + room)
+import Chat from "./chat"
+Chat.init(socket,room)
