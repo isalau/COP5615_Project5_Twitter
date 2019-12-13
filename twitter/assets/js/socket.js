@@ -78,6 +78,15 @@ if (channelRoomId) {
   });
 }
 
+const renderMessage = function(message) {
+  let messageTemplate = `
+    <li class="list-group-item">
+      ${message.content}
+    </li>
+  `
+  document.querySelector("#yourfeed").innerHTML += messageTemplate
+};
+
 let subRoomId = window.subRoomId
 if (subRoomId) {
   let channel = socket.channel(`room:${subRoomId}`, {})
@@ -99,6 +108,7 @@ if (subRoomId) {
 
   channel.on(`room:${subRoomId}:new_message`, (message) => {
     console.log("message", message)
+    renderMessage(message)
   });
 }
 

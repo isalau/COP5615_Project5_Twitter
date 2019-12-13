@@ -125,7 +125,7 @@
     </div>
 
     <div class="column" >
-      <div class ="feed">
+      <div class ="feed" id ="yourfeed">
       <h3>Your Feed</h3>
       <div class="qresults">
         <%= if @feed != nil do %>
