@@ -30,10 +30,11 @@ defmodule TwitterWeb.RegisterController do
         else
           if password1 == password2 do
             Register.reg(user_name, password1)
+            subs = nil
 
             conn
             |> put_session(:current_user_id, user_name)
-            |> redirect(to: Routes.user_path(conn, :index, user_name: user_name))
+            |> redirect(to: Routes.user_path(conn, :index, user_name: user_name, subs: subs))
           else
             conn
             |> put_flash(:info, "Passwords do not match. Please try again")

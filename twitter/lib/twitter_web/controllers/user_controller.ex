@@ -7,6 +7,7 @@ defmodule TwitterWeb.UserController do
 
   def index(conn, params) do
     username = get_in(params, ["user_name"])
+    subs = get_in(params, ["subs"])
     id = :"#{username}_cssa"
     {followers, subscribed, feed, tweets} = :sys.get_state(id)
 
@@ -23,6 +24,7 @@ defmodule TwitterWeb.UserController do
     render(conn, "index.html",
       user: user,
       username: username,
+      subs: subs,
       results: results,
       id: id,
       followers: followers,

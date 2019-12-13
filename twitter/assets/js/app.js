@@ -17,6 +17,8 @@ import "phoenix_html"
 import socket from "./socket"
 var msglist = document.getElementById("msglist");
 var room = msglist.getAttribute("data-uname");
+var subscribe = msglist.getAttribute("data-sname");
 console.log("name " + room)
 import Chat from "./chat"
 Chat.init(socket,room)
+Chat.init(socket,subscribe)
