@@ -7,6 +7,12 @@ defmodule TwitterWeb.RoomChannel do
 
   def handle_in("message:add", %{"message" => content}, socket) do
     room_id = socket.assigns[:room_id]
+    IO.inspect("IN HANDLE IN")
+    IO.inspect(content, label: "#{room_id} sending")
+    # sender = get_in(params, ["user_name"])
+    #
+    Tweet.send_tweet2(room_id, content)
+
     broadcast!(socket, "room:#{room_id}:new_message", %{content: content})
     {:reply, :ok, socket}
   end

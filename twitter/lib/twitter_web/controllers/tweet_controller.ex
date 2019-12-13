@@ -15,6 +15,7 @@ defmodule TwitterWeb.TweetController do
   # end
 
   def tweet(conn, params) do
+    IO.inspect("IN TWEET CONTROLLER")
     sender = get_in(params, ["user_name"])
     IO.inspect(sender, label: "Im sending the tweet0")
     tweet = get_in(params, ["tweet_text"])

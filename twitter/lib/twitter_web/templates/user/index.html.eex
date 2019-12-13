@@ -106,7 +106,7 @@
 
     <div class = "column">
       <div class="tweetbox" >
-        <%= form_for @conn, Routes.tweet_path(@conn, :tweet, user_name: @username), [id: "new-message"], fn f -> %>
+        <%= form_for @conn, Routes.tweet_path(@conn, :tweet, user_name: @username ), [id: "new-message"], fn f -> %>
           <%= text_input f, :tweet_text, [id: "message-content"]%>
           <%= submit "Tweet", class: "btn sub"%>
         <% end %>
@@ -116,7 +116,7 @@
   </div>
   <div class="row">
     <div class="column tw">
-      <div class="tweets">
+      <div class="tweets" id ="yourtweets">
       <h3>Your Tweets</h3>
         <%= for key <- get_keys(@username) do %>
           <%= render("tweets.html", key: key) %>

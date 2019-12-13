@@ -67,6 +67,8 @@ if (channelRoomId) {
   document.querySelector("#new-message").addEventListener('submit', (e) => {
     e.preventDefault()
     let messageInput = e.target.querySelector('#message-content')
+    var msglist = document.getElementById("msglist");
+    let messageSender = msglist.getAttribute("data-uname");
 
     channel.push('message:add', { message: messageInput.value })
 
@@ -75,8 +77,16 @@ if (channelRoomId) {
 
   channel.on(`room:${channelRoomId}:new_message`, (message) => {
     console.log("message", message)
+    renderMessageMe(message)
   });
 }
+
+const renderMessageMe = function(message) {
+  let messageTemplate = `
+      <p>${message.content}</p>
+  `
+  document.querySelector("#yourtweets").innerHTML += messageTemplate
+};
 
 const renderMessage = function(message) {
   let messageTemplate = `
@@ -97,7 +107,8 @@ if (subRoomId) {
 
   document.querySelector("#new-message").addEventListener('submit', (e) => {
     e.preventDefault()
-    let messageInput = e.target.querySelector('#message-content')
+    var msglist = document.getElementById("msglist");
+    let messageSender = msglist.getAttribute("data-uname");
 
     channel.push('message:add', { message: messageInput.value })
 
@@ -107,10 +118,6 @@ if (subRoomId) {
   channel.on(`room:${subRoomId}:new_message`, (message) => {
     console.log("message", message)
     renderMessage(message)
-    sender = get_in(params, ["user_name"])
-    IO.inspect(sender, label: "Im sending the tweet0")
-    tweet = get_in(params, ["tweet_text"])
-    Tweet.send_tweet(sender, tweet, conn)
   });
 }
 
