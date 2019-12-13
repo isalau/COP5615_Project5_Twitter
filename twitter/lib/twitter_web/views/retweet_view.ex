@@ -8,7 +8,7 @@ defmodule TwitterWeb.RetweetView do
     # convert the list to a keyword list
     _c = 0
     _lst = []
-    my_feed = ["HEY", "YOU"]
+    # my_feed = ["HEY", "YOU"]
 
     # {_, my_new_feed} =
     #   Enum.reduce(my_feed, {0, []}, fn x, {c, lst} ->

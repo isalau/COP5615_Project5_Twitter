@@ -5,7 +5,7 @@ defmodule Retweet do
 
     _c = 0
     _lst = []
-    my_feed = ["HEY", "YOU"]
+    # my_feed = ["HEY", "YOU"]
 
     {_, my_new_feed} =
       Enum.reduce(my_feed, {0, []}, fn x, {c, lst} ->
@@ -25,7 +25,7 @@ defmodule Retweet do
       newTweet = "#I am retweeting: tweet #{tweet}"
       # IO.inspect(tweet, label: "You Selected this tweet")
       IO.puts("RETWEETING STEP 4.1")
-      GenServer.call(id, {:tweet, newTweet})
+      GenServer.call(id, {:tweet2, newTweet})
       IO.puts("RETWEETING STEP 4.2")
     else
       # IO.puts("can't find the tweet you want to retweet")

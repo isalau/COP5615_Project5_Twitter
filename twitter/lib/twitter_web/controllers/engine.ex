@@ -42,12 +42,25 @@ defmodule Engine do
     {:reply, subscribed, {followers, subscribed, feed, tweets}}
   end
 
-  def handle_call({:tweet, tweet}, _from, {followers, subscribed, feed, tweets}) do
+  def handle_call({:tweet, tweet, conn}, _from, {followers, subscribed, feed, tweets}) do
     tweets = tweets ++ [tweet]
+    # followers = followers ++ ["ab_cssa"]
 
     if followers != [] do
       # IO.puts("Im distributing tweets")
-      Tweet.distribute_it(tweet, followers)
+      Tweet.distribute_it(tweet, followers, conn)
+    end
+
+    {:reply, tweets, {followers, subscribed, feed, tweets}}
+  end
+
+  def handle_call({:tweet2, tweet}, _from, {followers, subscribed, feed, tweets}) do
+    tweets = tweets ++ [tweet]
+    # followers = followers ++ ["ab_cssa"]
+
+    if followers != [] do
+      # IO.puts("Im distributing tweets")
+      Tweet.distribute_it2(tweet, followers)
     end
 
     {:reply, tweets, {followers, subscribed, feed, tweets}}
@@ -59,7 +72,16 @@ defmodule Engine do
     {:reply, tweets, {followers, subscribed, feed, tweets}}
   end
 
-  def handle_call({:got_mssg, tweet}, _from, {followers, subscribed, feed, tweets}) do
+  def handle_call({:got_mssg, tweet, conn, user}, _from, {followers, subscribed, feed, tweets}) do
+    feed = feed ++ [tweet]
+    # pid = self()
+    # IO.puts("My tweets are ")
+    # IO.inspect(tweets)
+    # TwitterWeb.TweetController.got_mssg(conn, user)
+    {:reply, feed, {followers, subscribed, feed, tweets}}
+  end
+
+  def handle_call({:got_mssg2, tweet}, _from, {followers, subscribed, feed, tweets}) do
     feed = feed ++ [tweet]
     # pid = self()
     # IO.puts("My tweets are ")

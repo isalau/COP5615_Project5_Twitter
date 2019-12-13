@@ -18,10 +18,15 @@ defmodule TwitterWeb.TweetController do
     sender = get_in(params, ["user_name"])
     IO.inspect(sender, label: "Im sending the tweet0")
     tweet = get_in(params, ["tweet_text"])
-    Tweet.send_tweet(sender, tweet)
+    Tweet.send_tweet(sender, tweet, conn)
 
     conn
     |> redirect(to: Routes.user_path(conn, :index, user_name: sender))
+  end
+
+  def got_mssg(conn, user) do
+    # conn
+    # |> redirect(to: Routes.user_path(conn, :index2, user_name: user))
   end
 
   #   def create(conn, %{"tweet" => tweet_params}) do

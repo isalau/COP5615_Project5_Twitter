@@ -17,8 +17,8 @@ defmodule CSA do
     {:ok, name}
   end
 
-  def handle_call({:tweet, mssg}, _from, name) do
-    Tweet.send_tweet(name, mssg)
+  def handle_call({:tweet2, mssg}, _from, name) do
+    Tweet.send_tweet2(name, mssg)
     {:reply, :ok, name}
   end
 
