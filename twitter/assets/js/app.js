@@ -21,4 +21,4 @@ var subscribe = msglist.getAttribute("data-sname");
 console.log("name " + room)
 import Chat from "./chat"
 Chat.init(socket,room)
-Chat.init(socket,subscribe)
+Sub.init(socket,subscribe)

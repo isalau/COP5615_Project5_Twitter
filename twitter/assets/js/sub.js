@@ -1,4 +1,4 @@
-let Chat = {
+let Sub = {
   init(socket,room) {
 
     let channel = socket.channel('room:' + room, {})
@@ -8,14 +8,6 @@ let Chat = {
   },
 
   listenForChats(channel) {
-    function submitForm(){
-    let userName = document.getElementById('user-name').value
-    let userMsg = document.getElementById('user-msg').value
-
-    channel.push('shout', {name: userName, body: userMsg})
-      document.getElementById('user-name').value = userName
-      document.getElementById('user-msg').value = userMsg
-    }
 
     document.getElementById('chat-form').addEventListener('submit', function(e){
       e.preventDefault()
@@ -32,4 +24,4 @@ let Chat = {
   }
 }
 
-export default Chat
+export default Sub
