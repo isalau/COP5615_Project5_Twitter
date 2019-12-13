@@ -21,6 +21,7 @@ defmodule Tweet do
   end
 
   def send_tweet2(sender, tweet) do
+    IO.puts("IN SEND TWEET 2")
     # Tell the process of sender about the tweet
     pid_sender = :"#{sender}_cssa"
     tweetLength = String.length(tweet)

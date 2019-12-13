@@ -55,6 +55,7 @@ defmodule Engine do
   end
 
   def handle_call({:tweet2, tweet}, _from, {followers, subscribed, feed, tweets}) do
+    IO.puts("IN GENSERVER")
     tweets = tweets ++ [tweet]
     # followers = followers ++ ["ab_cssa"]
 
