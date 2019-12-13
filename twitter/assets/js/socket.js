@@ -80,9 +80,7 @@ if (channelRoomId) {
 
 const renderMessage = function(message) {
   let messageTemplate = `
-    <li class="list-group-item">
       ${message.content}
-    </li>
   `
   document.querySelector("#yourfeed").innerHTML += messageTemplate
 };
@@ -111,7 +109,5 @@ if (subRoomId) {
     renderMessage(message)
   });
 }
-
-
 
 export default socket
