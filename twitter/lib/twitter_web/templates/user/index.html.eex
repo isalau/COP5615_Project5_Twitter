@@ -1,104 +1,128 @@
 <style>
 
-  header {
-    /* background-color: #2e86ab; */
-    margin: 0 auto;
-    width: 50%;
-  }
-
   body {
     /* background-color: #2e86ab; */
     margin: 0 auto;
-    width: 50%;
+    width: 80%;
   }
-  h3 {
+  h1{
+    float: left;
+    margin-top: 10rem;
     text-align: center;
+    position:relative;
   }
-  .tweetbox {
-    border-style: solid;
-    border-width: 3px;
-    border-radius: 5px;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    margin-bottom: 50px;
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-  .listings {
+  h3{
+    float: center;
+    margin-top: 10rem;
     text-align: center;
+    position:relative;
   }
-  .centerplease {
-    /* width: 80%; */
-    margin: 0 auto;
-    /* padding: 20px; */
-  }
-  .searchbox {
-    width: 30%;
-    align="right"
-  }
-  .button{
+  .allthebuttons{
     float: right;
-    font-size: 1.4rem;
-    height: 4.5rem;
-    line-height: 4.5rem;
-    padding: 0 2rem;
-    width: 20rem;
-    background-color:#2e86ab;
-    border: 2px solid #2e86ab;
+    /* margin-top: 10rem; */
+    position:relative;
+  }
+  .topad{
+    margin: 1rem;
+  }
+  .btn{
+    background-color:#0069d9;
+    border:0.1rem solid #0069d9;
+    border-radius:.4rem;
+    color:#fff;
+    cursor:pointer;
+    display:inline-block;
+    font-size:1.1rem;
+    font-weight:700;
+    height:3.8rem;
+    letter-spacing:.1rem;
+    line-height:3.8rem;
+    padding:0 3.0rem;
+    text-align:center;
+    text-decoration:none;
+    text-transform:uppercase;
+    white-space:nowrap
+  }
+  .tweetbox{
+    /* margin: 10rem; */
+    /* width: 40%; */
+    position: relative;
+  }
+  .sub{
+    float:right;
+    position: relative;
+  }
+  .button:hover {
+    background-image:none;
+    background-color:#38686a;
+    border: 2px solid #38686a;
+  }
+  .tweets{
+    border-right: 2px solid #38686a;
+    border-bottom: 2px solid #38686a;
+  }
+  .feed{
+    border-bottom: 2px solid #38686a;
   }
 </style>
 
 <%= if TwitterWeb.Auth.signed_in?(@conn) do %>
-<header>
-  <h1> <%= @username %></h1>
-
-  <div>
-    <a class="button" href="<%= Routes.query_path(@conn, :index, user_name: @username, results: @results) %>">Search</a>
-  </div>
-
-  <div align="right">
-    <%= form_for @conn, Routes.setting_path(@conn, :index, user_name: @username), fn f -> %>
-       <%= submit "Delete Account", class: "button" %>
-    <% end %>
-  </div>
-
-</header>
 <body>
-  <div class="tweetbox">
-  <%= form_for @conn, Routes.tweet_path(@conn, :tweet, user_name: @username ), fn f -> %>
-     <div class="form-group">
-       <label>Tweet:<%= text_input f, :tweet_text, class: "control-label" %></label>
-      </div>
-     <%= submit "Submit", class: "btn btn-primary" %>
-  <% end %>
+  <div class = "row">
+  <h1>Hi <%=  @username %>!</h1>
   </div>
+  <div class = "row">
+    <div class = "column">
+      <div class="tweetbox">
+        <%= form_for @conn, Routes.tweet_path(@conn, :tweet, user_name: @username ), fn f -> %>
+          <%= text_input f, :tweet_text%>
+          <%= submit "Submit", class: "button sub"%>
+        <% end %>
+      </div>
+    </div>
+    <div class = "column">
+      <div class="allthebuttons">
+        <div class="topad">
+          <a class="btn" href="<%= Routes.query_path(@conn, :index, user_name: @username, results: @results) %>">Search</a>
+        </div>
 
+        <div class="topad">
+          <a class="btn" href="<%= Routes.retweet_path(@conn, :index,user_name: @username) %>">Retweet</a>
+        </div>
+        <div class="topad">
+          <%= form_for @conn, Routes.setting_path(@conn, :index, user_name: @username), fn f -> %>
+             <%= submit "Delete Account", class: "btn" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="row">
     <div class="column">
       <h3>Your Tweets</h3>
-      <div class="listings">
-      <%= for key <- get_keys(@username) do %>
-        <%= render("tweets.html", key: key) %>
-      <% end %>
+      <div class="tweets">
+        <%= for key <- get_keys(@username) do %>
+          <%= render("tweets.html", key: key) %>
+          <% end %>
+      </div>
+    </div>
+
+    <div class="column">
+      <div class ="feed">
+      <h3>Your Feed   <a class="bn" href="<%= Routes.add_path(@conn, :index, user_name: @username) %>" style="float: right;">Add</a></h3>
+    </div>
+      <div class="qresults">
+        <%= if @feed != nil do %>
+          <p><%= @feed %></p>
+          <%= for key <- @feed do %>
+            <%= render("tweets.html", key: key) %>
+          <% end %>
+          <%= else %>
+        <% end %>
+      </div>
     </div>
   </div>
-
-  <div align="left">
-  <a class="button" href="<%= Routes.retweet_path(@conn, :index,user_name: @username) %>">Retweet</a></br>
 </div>
 
-  <div class="column">
-    <h3>Your Feed   <a class="button" href="<%= Routes.add_path(@conn, :index, user_name: @username) %>" style="float: right;">Add</a></h3>
-    <div class="qresults">
-      <%= if @feed != nil do %>
-        <p><%= @feed %></p>
-        <%= for key <- @feed do %>
-          <%= render("tweets.html", key: key) %>
-        <% end %>
-        <%= else %>
-      <% end %>
-    </div>
-</div>
-</div>
 </body>
 <% end %>
