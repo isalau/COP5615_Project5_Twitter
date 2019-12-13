@@ -13,7 +13,8 @@ defmodule Tweet do
         IO.puts("You cannot tweet an empty string")
         :EmptyTweet
       else
-        new_tweets = GenServer.call(pid_sender, {:tweet, tweet, conn})
+        tweetnname = "#{tweet} - #{sender}"
+        new_tweets = GenServer.call(pid_sender, {:tweet, tweetnname, conn})
         # IO.inspect(new_tweets, label: "#{sender} has tweeted")
         new_tweets
       end
@@ -35,7 +36,8 @@ defmodule Tweet do
         IO.puts("You cannot tweet an empty string")
         :EmptyTweet
       else
-        new_tweets = GenServer.call(pid_sender, {:tweet2, tweet})
+        tweetnname = "#{tweet} - #{sender}"
+        new_tweets = GenServer.call(pid_sender, {:tweet2, tweetnname})
         # IO.inspect(new_tweets, label: "#{sender} has tweeted")
         new_tweets
       end

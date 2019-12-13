@@ -21,10 +21,11 @@ defmodule TwitterWeb.SigninController do
 
       if pass2 == password do
         IO.puts("Successful sign in")
+        subs = []
 
         conn
         |> put_session(:current_user_id, user_name)
-        |> redirect(to: Routes.user_path(conn, :index, user_name: user_name))
+        |> redirect(to: Routes.user_path(conn, :index, user_name: user_name, subs: subs))
       else
         IO.puts("Failed sign in")
 

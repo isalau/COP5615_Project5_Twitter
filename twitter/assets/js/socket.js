@@ -90,20 +90,24 @@ if (channelRoomId) {
 
   channel.on(`room:${channelRoomId}:new_message`, (message) => {
     console.log("message", message)
-    renderMessageMe(message)
+    renderMessageMe(message,channelRoomId)
   });
 }
 
-const renderMessageMe = function(message) {
+const renderMessageMe = function(message,name) {
+  var m = message.content
+  var msg = m + " - " + name
   let messageTemplate = `
-      <p>${message.content}</p>
+      <p>${msg}</p>
   `
   document.querySelector("#yourtweets").innerHTML += messageTemplate
 };
 
-const renderMessage = function(message) {
+const renderMessage = function(message, name) {
+  var m = message.content
+  var msg = m + " - " + name
   let messageTemplate = `
-      <p>${message.content}</p>
+      <p>${msg}</p>
   `
   document.querySelector("#yourfeed").innerHTML += messageTemplate
 };
@@ -131,7 +135,9 @@ if (subsRoomId) {
 
     channel.on(`room:${subsRoomId[subRoomId]}:new_message`, (message) => {
       console.log("message", message)
-      renderMessage(message)
+      var msgVal = message
+
+      renderMessage(message, subsRoomId[subRoomId])
     });
   }
 }
@@ -159,7 +165,7 @@ if (retweetRoomId) {
 
   channel.on(`room:${retweetRoomId}:new_message`, (message) => {
     console.log("message", message)
-    renderMessageMe(message)
+    renderMessageMe(message,retweetRoomId)
   });
 }
 
