@@ -69,14 +69,14 @@
 <%= if TwitterWeb.Auth.signed_in?(@conn) do %>
 <body>
   <div class = "row">
-  <h1>Hi <%=  @username %>!</h1>
+  <h1>Hi <%=  @username %>! What's on your mind?</h1>
   </div>
   <div class = "row">
     <div class = "column">
       <div class="tweetbox">
         <%= form_for @conn, Routes.tweet_path(@conn, :tweet, user_name: @username ), fn f -> %>
           <%= text_input f, :tweet_text%>
-          <%= submit "Submit", class: "button sub"%>
+          <%= submit "Tweet", class: "button sub"%>
         <% end %>
       </div>
     </div>
@@ -89,6 +89,11 @@
         <div class="topad">
           <a class="btn" href="<%= Routes.retweet_path(@conn, :index,user_name: @username) %>">Retweet</a>
         </div>
+
+        <div class="topad">
+          <a class="btn" href="<%= Routes.add_path(@conn, :index, user_name: @username) %>">Add</a>
+        </div>
+
         <div class="topad">
           <%= form_for @conn, Routes.setting_path(@conn, :index, user_name: @username), fn f -> %>
              <%= submit "Delete Account", class: "btn" %>
@@ -109,11 +114,10 @@
 
     <div class="column">
       <div class ="feed">
-      <h3>Your Feed   <a class="bn" href="<%= Routes.add_path(@conn, :index, user_name: @username) %>" style="float: right;">Add</a></h3>
+      <h3>Your Feed   </h3>
     </div>
       <div class="qresults">
         <%= if @feed != nil do %>
-          <p><%= @feed %></p>
           <%= for key <- @feed do %>
             <%= render("tweets.html", key: key) %>
           <% end %>
