@@ -4,18 +4,21 @@ defmodule TwitterWeb.AddController do
   alias Twitter.Adds
   alias Twitter.Adds.Add
 
-  def index(conn, %{"user_name" => user_name} = params) do
+  def index(conn, %{"user_name" => user_name, "subs" => subs} = params) do
     # add = Adds.list_add()
 
     # sender = Map.get(params, :user_name)
     IO.inspect(user_name, label: "in add index")
-    render(conn, "index.html", user_name: user_name)
+    IO.inspect(subs, label: "in add index subs")
+    render(conn, "index.html", user_name: user_name, subs: subs)
   end
 
-  def addSub(conn, %{"user_name" => user_name} = params) do
+  def addSub(conn, %{"user_name" => user_name, "subs" => subs} = params) do
     sender = user_name
     IO.inspect(sender, label: "in add sub")
     subs = get_in(params, ["tofollow"])
+    newsubslist = get_in(params, ["subs"])
+    IO.inspect(newsubslist, label: "in add addSub subs")
 
     {pass_users, tot_users, _, _} = :sys.get_state(:"#{Engine}_cssa")
     tot_users = tot_users -- [sender]
@@ -29,9 +32,19 @@ defmodule TwitterWeb.AddController do
         pid_sender = :"#{sender}"
         GenServer.call(pid_sender, {:subscribe, subs})
 
+        # append to sub
+        newsubslist =
+          if(newsubslist != "") do
+            newsubslist = newsubslist ++ [subs]
+          else
+            newsubslist = [subs]
+          end
+
+        IO.inspect(newsubslist, label: "newsubslist")
+
         conn
         |> put_flash(:info, "Sucess! Now subscribed to #{subs}")
-        |> redirect(to: Routes.user_path(conn, :index, user_name: user_name, subs: subs))
+        |> redirect(to: Routes.user_path(conn, :index, user_name: user_name, subs: newsubslist))
       else
         conn
         |> put_flash(:info, "Person you are trying to subscribe does not exist")

@@ -95,30 +95,35 @@ const renderMessage = function(message) {
   document.querySelector("#yourfeed").innerHTML += messageTemplate
 };
 
-let subRoomId = window.subRoomId
-if (subRoomId) {
-  let channel = socket.channel(`room:${subRoomId}`, {})
+let subsRoomId = window.subRoomId
+console.log("array is "+ subsRoomId)
+if (subsRoomId) {
+  for (subRoomId in subsRoomId) {
+    console.log("value in sub array is "+ subsRoomId[subRoomId])
+    let channel = socket.channel(`room:${subsRoomId[subRoomId]}`, {})
 
-  channel.join()
-    .receive("ok", resp => { console.log("Joined successfully", resp) })
-    .receive("error", resp => { console.log("Unable to join", resp) })
+    channel.join()
+      .receive("ok", resp => { console.log("Joined successfully", resp) })
+      .receive("error", resp => { console.log("Unable to join", resp) })
 
-  // Now that you are connected, you can join channels with a topic:
+    // Now that you are connected, you can join channels with a topic:
 
-  document.querySelector("#new-message").addEventListener('submit', (e) => {
-    e.preventDefault()
-    var msglist = document.getElementById("msglist");
-    let messageSender = msglist.getAttribute("data-uname");
+    document.querySelector("#new-message").addEventListener('submit', (e) => {
+      e.preventDefault()
+      var msglist = document.getElementById("msglist");
+      let messageSender = msglist.getAttribute("data-uname");
 
-    channel.push('message:add', { message: messageInput.value })
+      channel.push('message:add', { message: messageInput.value })
 
-    messageInput.value = ""
-  });
+      messageInput.value = ""
+    });
 
-  channel.on(`room:${subRoomId}:new_message`, (message) => {
-    console.log("message", message)
-    renderMessage(message)
-  });
+    channel.on(`room:${subsRoomId[subRoomId]}:new_message`, (message) => {
+      console.log("message", message)
+      renderMessage(message)
+    });
+  }
 }
+
 
 export default socket

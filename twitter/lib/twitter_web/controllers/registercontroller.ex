@@ -30,7 +30,7 @@ defmodule TwitterWeb.RegisterController do
         else
           if password1 == password2 do
             Register.reg(user_name, password1)
-            subs = nil
+            subs = []
 
             conn
             |> put_session(:current_user_id, user_name)

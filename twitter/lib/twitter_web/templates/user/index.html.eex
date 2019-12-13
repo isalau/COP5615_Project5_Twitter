@@ -93,7 +93,7 @@
         </div>
 
         <div class="topad">
-          <a class="btn" href="<%= Routes.add_path(@conn, :index, user_name: @username) %>">Add</a>
+          <a class="btn" href="<%= Routes.add_path(@conn, :index, user_name: @username, subs: @subs) %>">Add</a>
         </div>
 
         <div class="topad">

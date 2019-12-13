@@ -14,6 +14,7 @@ defmodule TwitterWeb.UserController do
     IO.inspect(id, label: "Your ID is ")
     IO.inspect(followers, label: "Your followers are ")
     IO.inspect(subscribed, label: "Your subscribed are ")
+    IO.inspect(subs, label: "Your subs are ")
     IO.inspect(feed, label: "Your feed is ")
     IO.inspect(tweets, label: "Your tweets are ")
 

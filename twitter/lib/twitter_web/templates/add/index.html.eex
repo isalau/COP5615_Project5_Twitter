@@ -58,7 +58,7 @@
 
 <div class="centerplease">
 <h1>Subscribe To Someone</h1>
-<%= form_for @conn, Routes.add_path(@conn, :addSub, user_name: @user_name), fn f -> %>
+<%= form_for @conn, Routes.add_path(@conn, :addSub, user_name: @user_name,subs: @subs), fn f -> %>
   <%= text_input f, :tofollow ,placeholder: "Username"%>
   <%= error_tag f, :tofollow %>
   <div>
