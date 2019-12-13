@@ -58,6 +58,7 @@ defmodule Engine do
     IO.puts("IN GENSERVER")
     tweets = tweets ++ [tweet]
     # followers = followers ++ ["ab_cssa"]
+    IO.inspect(tweets, label: "IN GENSERVER TWEET2")
 
     if followers != [] do
       # IO.puts("Im distributing tweets")
@@ -86,7 +87,7 @@ defmodule Engine do
     feed = feed ++ [tweet]
     # pid = self()
     # IO.puts("My tweets are ")
-    # IO.inspect(tweets)
+    IO.inspect(feed, label: "in got msg 2")
     {:reply, feed, {followers, subscribed, feed, tweets}}
   end
 

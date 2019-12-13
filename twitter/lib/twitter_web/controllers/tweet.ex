@@ -54,6 +54,7 @@ defmodule Tweet do
   end
 
   def distribute_it2(tweet, people) do
+    IO.puts("In distribute it 2")
     # Tell the engine to distribute the tweet
     # pid = :"#{Engine}_cssa"
     # :ok = GenServer.call(pid, {:distribute, tweet, people})

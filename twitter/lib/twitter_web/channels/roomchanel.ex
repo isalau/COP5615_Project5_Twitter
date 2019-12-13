@@ -12,6 +12,7 @@ defmodule TwitterWeb.RoomChannel do
     Tweet.send_tweet2(room_id, content)
 
     broadcast!(socket, "room:#{room_id}:new_message", %{content: content})
+    IO.puts("broadcasted everything")
     {:reply, :ok, socket}
   end
 end
