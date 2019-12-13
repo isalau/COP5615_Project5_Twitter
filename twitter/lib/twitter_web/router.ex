@@ -22,8 +22,8 @@ defmodule TwitterWeb.Router do
     get "/signin", SigninController, :index
     post "/signin", SigninController, :signin
     resources "/events", EventController
+    post "/user", UserController, :index
     post "/user", TweetController, :tweet
-
     resources "/user", UserController
     get "/retweet", RetweetController, :index
     post "/retweet", RetweetController, :retweet

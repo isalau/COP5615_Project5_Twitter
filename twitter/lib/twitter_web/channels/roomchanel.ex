@@ -1,12 +1,12 @@
 defmodule TwitterWeb.RoomChannel do
   use Phoenix.Channel
 
-  def join("room:" <> _room, _payload, socket) do
-    {:ok, socket}
+  def join(channel_name, _params, socket) do
+    {:ok, %{channel: channel_name}, socket}
   end
 
-  def handle_in("shout", payload, socket) do
-    broadcast(socket, "shout", payload)
-    {:noreply, socket}
+  def handle_in("message:add", %{"message" => content}, socket) do
+    broadcast!(socket, "room:lobby:new_message", %{content: content})
+    {:reply, :ok, socket}
   end
 end

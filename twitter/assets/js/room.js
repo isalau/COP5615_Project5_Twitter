@@ -1,8 +1,8 @@
-let Chat = {
-  init(socket,room) {
+let Room = {
+  init(socket, me, room) {
 
     let channel = socket.channel('room:' + room, {})
-    channel.join()
+    channel.join().receive("ok", resp => { console.log(me+ " joined room: " + room + " successfully", resp) })
 
     this.listenForChats(channel)
   },
@@ -32,4 +32,4 @@ let Chat = {
   }
 }
 
-export default Chat
+export default Room

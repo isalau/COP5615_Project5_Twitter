@@ -1,13 +1,21 @@
 let Sub = {
-  init(socket,room) {
+  init(socket, me, room) {
 
     let channel = socket.channel('room:' + room, {})
-    channel.join()
+    channel.join().receive("ok", resp => { console.log(me+ " joined room: " + room + " successfully", resp) })
 
     this.listenForChats(channel)
   },
 
   listenForChats(channel) {
+    function submitForm(){
+    let userName = document.getElementById('user-name').value
+    let userMsg = document.getElementById('user-msg').value
+
+    channel.push('shout', {name: userName, body: userMsg})
+      document.getElementById('user-name').value = userName
+      document.getElementById('user-msg').value = userMsg
+    }
 
     document.getElementById('chat-form').addEventListener('submit', function(e){
       e.preventDefault()
