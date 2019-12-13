@@ -25,10 +25,10 @@
     font-size: 1.4rem;
     height: 4.5rem;
     line-height: 4.5rem;
-    padding: 0 2rem;
-    width: 40rem;
     background-color:#2e86ab;
     border: 2px solid #2e86ab;
+    display: flex;
+  justify-content: center;
   }
   .button:hover {
   background-image:none;
