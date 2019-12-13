@@ -26,7 +26,7 @@ defmodule Twitter.Application do
     subscribed = []
     feed = []
     {:ok, _pid} = Engine.start_link([followers, subscribed, feed, tweets, Engine])
-    runSimulation(5, 5)
+    runSimulation(100, 5)
     opts = [strategy: :one_for_one, name: Twitter.Supervisor]
     Supervisor.start_link(children, opts)
   end
