@@ -108,10 +108,10 @@ const renderMessage = function(message) {
   document.querySelector("#yourfeed").innerHTML += messageTemplate
 };
 
-let subRoomId = window.subRoomId
-if (subRoomId) {
-  // for (subRoomId in subsRoomId) {
-    let channel = socket.channel(`room:${subRoomId}`, {})
+let subsRoomId = window.subRoomId
+if (subsRoomId) {
+  for (subRoomId in subsRoomId) {
+    let channel = socket.channel(`room:${subsRoomId[subRoomId]}`, {})
 
     channel.join()
       .receive("ok", resp => { console.log("Joined successfully", resp) })
@@ -129,11 +129,11 @@ if (subRoomId) {
       messageInput.value = ""
     });
 
-    channel.on(`room:${subRoomId}:new_message`, (message) => {
+    channel.on(`room:${subsRoomId[subRoomId]}:new_message`, (message) => {
       console.log("message", message)
       renderMessage(message)
     });
-  // }
+  }
 }
 
 let retweetRoomId = window.retweetRoomId
