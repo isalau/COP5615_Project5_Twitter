@@ -1,4 +1,5 @@
 <script>window.channelRoomId = "<%= @username%>"</script>
+<script>window.subRoomId = "<%= @subs%>"</script>
 <style>
 
   body {

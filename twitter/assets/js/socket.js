@@ -54,7 +54,6 @@ let socket = new Socket("/socket", {params: {token: window.userToken}})
 // Finally, connect to the socket:
 socket.connect()
 
-
 let channelRoomId = window.channelRoomId
 if (channelRoomId) {
   let channel = socket.channel(`room:${channelRoomId}`, {})
@@ -74,8 +73,35 @@ if (channelRoomId) {
     messageInput.value = ""
   });
 
-  channel.on("room:lobby:new_message", (message) => {
+  channel.on(`room:${channelRoomId}:new_message`, (message) => {
     console.log("message", message)
   });
 }
+
+let subRoomId = window.subRoomId
+if (subRoomId) {
+  let channel = socket.channel(`room:${subRoomId}`, {})
+
+  channel.join()
+    .receive("ok", resp => { console.log("Joined successfully", resp) })
+    .receive("error", resp => { console.log("Unable to join", resp) })
+
+  // Now that you are connected, you can join channels with a topic:
+
+  document.querySelector("#new-message").addEventListener('submit', (e) => {
+    e.preventDefault()
+    let messageInput = e.target.querySelector('#message-content')
+
+    channel.push('message:add', { message: messageInput.value })
+
+    messageInput.value = ""
+  });
+
+  channel.on(`room:${subRoomId}:new_message`, (message) => {
+    console.log("message", message)
+  });
+}
+
+
+
 export default socket
