@@ -14,11 +14,10 @@
   }
   h3{
     float: center;
-    margin-top: 10rem;
+    /* margin-top: 10rem; */
     text-align: center;
     position:relative;
     border-bottom: 2px solid #38686a;
-
   }
   .allthebuttons{
     float: left;
@@ -59,11 +58,14 @@
     background-color:#2e86ab;
     border: 2px solid #2e86ab;
   }
-  .tweets{
+  .column.tw{
     border-right: 2px solid #38686a;
   }
+  .tweets{
+    /* border-right: 2px solid #38686a; */
+  }
   .feed{
-    border-left: 2px solid #38686a;
+    /* border-left: 2px solid #38686a; */
   }
 </style>
 
@@ -116,7 +118,7 @@
     </div>
   </div>
   <div class="row">
-    <div class="column">
+    <div class="column tw">
       <div class="tweets">
       <h3>Your Tweets</h3>
         <%= for key <- get_keys(@username) do %>
@@ -125,10 +127,9 @@
       </div>
     </div>
 
-    <div class="column">
+    <div class="column" >
       <div class ="feed">
-      <h3>Your Feed   </h3>
-
+      <h3>Your Feed</h3>
       <div class="qresults">
         <%= if @feed != nil do %>
           <%= for key <- @feed do %>
