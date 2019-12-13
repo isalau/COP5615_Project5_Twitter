@@ -54,6 +54,19 @@ let socket = new Socket("/socket", {params: {token: window.userToken}})
 // Finally, connect to the socket:
 socket.connect()
 
+  // var testarray = ["test1","test2","test3","test4","test5","test6"]
+  // console.log("testarray array is "+ testarray)
+  // for (const item in testarray) {
+  //   console.log("value in testarray is "+ testarray[item])
+  // }
+  //
+  // var msglist = document.getElementById("msglist");
+  // let sprint = msglist.getAttribute("data-sname");
+  // console.log("sprint array is "+ sprint)
+  // for (const item in sprint) {
+  //   console.log("value in sprint is "+ sprint[item])
+  // }
+
 let channelRoomId = window.channelRoomId
 if (channelRoomId) {
   let channel = socket.channel(`room:${channelRoomId}`, {})
@@ -95,12 +108,10 @@ const renderMessage = function(message) {
   document.querySelector("#yourfeed").innerHTML += messageTemplate
 };
 
-let subsRoomId = window.subRoomId
-console.log("array is "+ subsRoomId)
-if (subsRoomId) {
-  for (subRoomId in subsRoomId) {
-    console.log("value in sub array is "+ subsRoomId[subRoomId])
-    let channel = socket.channel(`room:${subsRoomId[subRoomId]}`, {})
+let subRoomId = window.subRoomId
+if (subRoomId) {
+  // for (subRoomId in subsRoomId) {
+    let channel = socket.channel(`room:${subRoomId}`, {})
 
     channel.join()
       .receive("ok", resp => { console.log("Joined successfully", resp) })
@@ -118,11 +129,38 @@ if (subsRoomId) {
       messageInput.value = ""
     });
 
-    channel.on(`room:${subsRoomId[subRoomId]}:new_message`, (message) => {
+    channel.on(`room:${subRoomId}:new_message`, (message) => {
       console.log("message", message)
       renderMessage(message)
     });
-  }
+  // }
+}
+
+let retweetRoomId = window.retweetRoomId
+if (retweetRoomId) {
+  let channel = socket.channel(`room:${retweetRoomId}`, {})
+
+  channel.join()
+    .receive("ok", resp => { console.log("Joined successfully", resp) })
+    .receive("error", resp => { console.log("Unable to join", resp) })
+
+  // Now that you are connected, you can join channels with a topic:
+
+  document.querySelector("#new-message").addEventListener('submit', (e) => {
+    e.preventDefault()
+
+    let messageInput = e.target.querySelector('#message-retweet')
+    console.log("pushed submit in retweet " + messageInput.value)
+    // var msglist = document.getElementById("msglist");
+    // let messageSender = msglist.getAttribute("data-uname");
+    channel.push('message:retweet', { message: messageInput.value })
+    messageInput.value = ""
+  });
+
+  channel.on(`room:${retweetRoomId}:new_message`, (message) => {
+    console.log("message", message)
+    renderMessageMe(message)
+  });
 }
 
 

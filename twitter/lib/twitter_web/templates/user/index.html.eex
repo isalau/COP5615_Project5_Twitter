@@ -1,5 +1,14 @@
 <script>window.channelRoomId = "<%= @username%>"</script>
-<script>window.subRoomId = "<%= @subs%>"</script>
+<script>
+"<%= if @subs != nil do %>"
+  "<%= for key <- @subs do %>"
+  "<%= test = key %>"
+  console.log("<%= key %>")
+  window.subRoomId = "<%= key%>"
+  "<% end %>"
+"<% end %>"
+</script>
+
 <style>
 
   body {

@@ -1,3 +1,4 @@
+<script>window.retweetRoomId = "<%= @username%>"</script>
 <style>
 
   h3 {
@@ -29,9 +30,9 @@
 </div>
 
 <div class="retweetbox">
-<%= form_for @conn, Routes.retweet_path(@conn, :retweet, user_name: @username ), fn f -> %>
+<%= form_for @conn, Routes.retweet_path(@conn, :retweet, user_name: @username ), [id: id="new-message"], fn f -> %>
    <div class="form-group">
-     <label>Choose a number:<%= text_input f, :tweet_num, class: "control-label" %></label>
+     <label>Choose a number:<%= text_input f, :tweet_num, [id: "message-retweet"] %></label>
     </div>
    <%= submit "Submit", class: "btn btn-primary" %>
 <% end %>

@@ -15,4 +15,15 @@ defmodule TwitterWeb.RoomChannel do
     IO.puts("broadcasted everything")
     {:reply, :ok, socket}
   end
+
+  def handle_in("message:retweet", %{"message" => content}, socket) do
+    room_id = socket.assigns[:room_id]
+    IO.inspect("IN HANDLE IN RETWEET")
+    IO.inspect(content, label: "#{room_id} sending")
+    Retweet.re_tweet(room_id, content)
+
+    broadcast!(socket, "room:#{room_id}:new_message", %{content: content})
+    IO.puts("broadcasted everything")
+    {:reply, :ok, socket}
+  end
 end
