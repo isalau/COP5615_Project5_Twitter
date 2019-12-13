@@ -67,13 +67,18 @@
   }
 </style>
 
+
 <%= if TwitterWeb.Auth.signed_in?(@conn) do %>
 <body>
   <div class = "row">
     <div class = "column">
       </div>
-      <div class = "column">
-  <h1>Hi <%=  @username %>! What's on your mind?</h1>
+      <div class = "column" id= "msglist">
+        <h1>Hi <%=  @username %>! What's on your mind?</h1>
+        <script>
+          var msglist = document.getElementById("msglist");
+          msglist.setAttribute("data-uname", "<%=  @username %>");
+        </script>
 </div>
   </div>
   <div class = "row">
