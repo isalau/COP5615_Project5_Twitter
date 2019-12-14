@@ -22,7 +22,8 @@ defmodule TwitterWeb.RoomChannel do
     # IO.inspect(content, label: "#{room_id} sending")
     tweet = Retweet.re_tweet(room_id, content)
     IO.inspect(tweet, label: "The tweet im retweeting")
-    broadcast!(socket, "room:#{room_id}:new_message", %{content: tweet})
+    justTweet = elem(tweet, 1)
+    broadcast!(socket, "room:#{room_id}:new_message", %{content: justTweet})
     IO.puts("broadcasted everything")
     {:reply, :ok, socket}
   end
