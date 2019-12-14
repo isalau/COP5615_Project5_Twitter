@@ -79,13 +79,22 @@ if (channelRoomId) {
 
   document.querySelector("#new-message").addEventListener('submit', (e) => {
     e.preventDefault()
+
     let messageInput = e.target.querySelector('#message-content')
     var msglist = document.getElementById("msglist");
     let messageSender = msglist.getAttribute("data-uname");
-
-    channel.push('message:add', { message: messageInput.value })
-
-    messageInput.value = ""
+    console.log("tweet length is " + messageInput.value.length)
+    if (messageInput.value.length < 280 && messageInput.value.length > 0){
+      channel.push('message:add', { message: messageInput.value })
+      document.getElementById("longtweet").innerHTML = ""
+      messageInput.value = ""
+    } else if (messageInput.value.length == 0) {
+      document.getElementById("longtweet").innerHTML = "You can't send an empty tweet"
+      messageInput.value = ""
+    }else{
+      document.getElementById("longtweet").innerHTML = "Your tweet is too long"
+      messageInput.value = ""
+    }
   });
 
   channel.on(`room:${channelRoomId}:new_message`, (message) => {
@@ -128,9 +137,15 @@ if (subsRoomId) {
       var msglist = document.getElementById("msglist");
       let messageSender = msglist.getAttribute("data-uname");
 
-      channel.push('message:add', { message: messageInput.value })
-
-      messageInput.value = ""
+      console.log("tweet length is " + messageInput.value.length)
+      if (messageInput.value.length < 280 && messageInput.value.length > 0){
+        channel.push('message:add', { message: messageInput.value })
+        document.getElementById("longtweet").innerHTML = ""
+        messageInput.value = ""
+      }else{
+        document.getElementById("longtweet").innerHTML = "Your tweet is too long"
+        messageInput.value = ""
+      }
     });
 
     channel.on(`room:${subsRoomId[subRoomId]}:new_message`, (message) => {
