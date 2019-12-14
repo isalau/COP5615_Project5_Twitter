@@ -19,6 +19,7 @@
   }
 
 </style>
+
 <h1> YOUR FEED </h1>
 
 <div class="listings">
@@ -29,10 +30,14 @@
   </ol>
 </div>
 
-<div class="retweetbox">
-<%= form_for @conn, Routes.retweet_path(@conn, :retweet, user_name: @username ), [id: id="new-message"], fn f -> %>
+<div class="retweetbox" id= "msglist" >
+<%= form_for @conn, Routes.retweet_path(@conn, :retweet, user_name: @username ),[id: "new-retweet"], fn f -> %>
    <div class="form-group">
-     <label>Choose a number:<%= text_input f, :tweet_num, [id: "message-retweet"] %></label>
+     <label>Choose a number:<%= text_input f, :tweet_num, [id: "message-number", class: "control-label"] %></label>
+     <script>
+          var msglist = document.getElementById("msglist");
+          msglist.setAttribute("data-uname", "<%=  @username %>");
+      </script>
     </div>
    <%= submit "Submit", class: "btn btn-primary" %>
 <% end %>

@@ -30,5 +30,7 @@ defmodule Retweet do
     else
       # IO.puts("can't find the tweet you want to retweet")
     end
+
+    tweet = tweet
   end
 end
